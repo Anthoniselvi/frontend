@@ -1,0 +1,54 @@
+.faq-container{
+    height: 100vh;
+        width: 100vw;
+        padding: 5%;
+        background-color: #fff;
+        color: #121212;
+        display: flex;
+        flex-direction: column;
+        gap:10%;
+}
+.faq-heading{
+    text-align: center
+}
+.accord-container{
+    background-color: #fff; color: #121212 ;
+ 
+}
+.accord-subhead{
+    
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    color: #101828;
+}
+.account-para{
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    color: #5e6577;
+}
+.faq-content{
+    display: flex;
+    flex-direction: column;
+    gap:10%;
+    padding: 0% 20%;
+}
+@media (max-width: 1000px) {
+    .faq-container{
+        padding: 5%;
+    }
+    .faq-heading{
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 35px;
+        text-align: center
+    }
+    .faq-content{
+        padding: 0;
+        /* height:100%; */
+    }
+    .accord-subhead{
+            font-size: 13px;
+    }
+}

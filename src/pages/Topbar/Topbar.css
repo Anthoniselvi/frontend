@@ -1,0 +1,40 @@
+/* Navbar styles */
+.topbar {
+  height: 40vh;
+  border-bottom: 0.5px solid rgb(231, 228, 228);
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  background-image: url("../../img/bg1.png");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+/* Wrapper styles */
+.topbar .wrapper {
+  width: 100%;
+  padding: 20px;
+  /* display: flex;
+  align-items: top;
+  justify-content:right; */
+ 
+}
+
+.wrapper-text{
+  position: absolute;
+  z-index: 1000;
+ font-size: 24px;
+ font-weight: 600;
+ line-height: 30px;
+ color: #fff;
+ top: 20px;
+ right: 20px
+}
+@media (max-width: 1000px) {
+  .wrapper-text{
+    top: 70px;
+  }
+  
+}

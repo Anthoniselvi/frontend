@@ -1,0 +1,130 @@
+.carousel-container {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:10%;
+    height: 100vh;
+    background-color: #fafbfd;
+     width: 100%; 
+     padding: 10% 5%;
+  }
+  .carousel-heading{
+    color: #101a34;
+    font-weight: 600;
+    font-family: "Poppins";
+    font-size: 30px;
+    
+  }
+  
+  
+  .carousel-wrapper {
+    width: 100%;
+    padding: 2% 0%;
+  }
+  
+  .rec-carousel-item:focus {
+    outline: none;
+    box-shadow: inset 0 0 1px 0px violet;
+  }
+  
+.card {
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    margin-top: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;
+                  border: 1px solid #e8ecf1;
+                  padding: 4%;
+                  
+  }
+  .card-top{
+    display: flex;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+  }
+  .card__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 22px;
+    font-weight: 600;
+    color: #5d9bb1;
+   font-family: Poppins;
+    background-color: #ceeff4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card__content {
+    height: 90%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5%;
+  }
+  
+  .card__title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .card__name {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    font-family: Poppins;
+    color: #5d9bb1;
+    text-align: center;
+  }
+  
+  .card__text {
+    /* margin-top: 8px; */
+   font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+    color: #5e6577;
+    font-family: "Poppins";
+
+  }
+  
+  .card__btn {
+    margin-top: 16px;
+    padding: 8px 16px;
+    background-color: #2d66c3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .card__btn:hover {
+    background-color: #1e4da9;
+  }
+ 
+  @media (max-width: 1000px) {
+    .carousel-container{
+      background-color: #fff;
+      width: 100%;
+      height: 100%;
+      padding: 10% 5%;
+    }
+    .card{
+      padding: 0;
+      margin: 0;
+      height: 500px;
+      width: 350px;
+    }
+  }
