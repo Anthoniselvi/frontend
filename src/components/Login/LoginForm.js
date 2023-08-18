@@ -1,10 +1,8 @@
-import { Box, Button, Divider, TextField, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material";
-import { tokens } from "../../theme";
 import SigninValidation from "./SigninValidation";
 import { auth } from "../../firebase";
 import { useUserAuth } from "../../auth";
@@ -13,15 +11,10 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
-import { IconButton, InputAdornment } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
-  // const {role, setRole, isLoggedIn, setIsLoggedIn, logout} = useAuthContext()
 
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const { googleSignIn, facebookSignIn, user } = useUserAuth();
 
@@ -35,9 +28,6 @@ const LoginForm = () => {
   const [error, setError] = useState("");
 
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
-  const handlePasswordVisibility = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
 
   const handleChange = (event) => {
     setSigninData({
@@ -83,10 +73,6 @@ const LoginForm = () => {
     } catch (error) {
       console.log(error.message);
     }
-  };
-
-  const navigateToResetPassword = () => {
-    navigate("/resetpassword");
   };
 
   const handleFacebookSignIn = async (e) => {

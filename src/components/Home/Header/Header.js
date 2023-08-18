@@ -1,7 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
 import "./Header.css";
-import Navbar from "../Navbar/Navbar";
 
 export default function FirstPage() {
   //   const navigate = useNavigate();

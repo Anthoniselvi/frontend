@@ -1,6 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import "./Works.css";
 
 export default function Works() {
@@ -17,7 +17,7 @@ export default function Works() {
 
       <Box className="works-inner-box">
         <Box className="works-img-box">
-          <img className="works-img" src="/img/ph1.png" />
+          <img className="works-img" alt="image" src="/img/ph1.png" />
         </Box>
         <Box className="works-text-box">
           <h2 className="works-text-title">
@@ -25,14 +25,22 @@ export default function Works() {
           </h2>
           <div className="works-bottom-container">
             <div className="works-content-box">
-              <img className="works-content-img" src="/img/check.png" />
+              <img
+                className="works-content-img"
+                alt="image"
+                src="/img/check.png"
+              />
               <h4 className="works-content">
                 Record the gift details for birthdays, weddings, housewarming,
                 ear-piercing, and more.
               </h4>
             </div>
             <div className="works-content-box">
-              <img className="works-content-img" src="/img/check.png" />
+              <img
+                className="works-content-img"
+                alt="image"
+                src="/img/check.png"
+              />
 
               <h4 className="works-content">
                 Share your list with your spouse and family.

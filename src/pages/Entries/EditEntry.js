@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useMediaQuery } from "@mui/material";
 import { Box } from "@mui/material";
@@ -37,7 +37,6 @@ export default function EditEntry({ open, onClose, entryId }) {
   const [amount, setAmount] = useState("");
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("");
-  const [refreshCount, setRefreshCount] = useState(0);
   // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
 
   // const { updateRefreshCount } = useContext(RefreshContext);

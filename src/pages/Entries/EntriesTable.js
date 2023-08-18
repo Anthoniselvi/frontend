@@ -1,31 +1,22 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import {
-  Box,
-  Typography,
-  IconButton,
-  Tooltip,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 // import "./SearchStyle.css";
 import axios from "axios";
-import { Delete, Edit } from "@mui/icons-material";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import { useSearchParams } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import DeleteEntry from "./DeleteEntry";
 import EditEntry from "./EditEntry";
-import NewEntriesPage from "./NewEntriesPage";
 import EntriesPage from "./EntriesPage";
 export default function EntriesTable() {
   const isNonMobile = useMediaQuery("(max-width: 1000px)");
-  const navigate = useNavigate();
+
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
   const [entries, setEntries] = useState([]);
   const [eventsList, setEventsList] = useState({});
-  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();

@@ -1,10 +1,8 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material";
-import { tokens } from "../../theme";
 import Validation from "./Validation";
 import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
@@ -18,8 +16,7 @@ const SignupForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
   // const {role, setRole, isLoggedIn, setIsLoggedIn, logout} = useAuthContext()
   const { googleSignIn, user } = useUserAuth();
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+
   const [signupData, setSignupData] = useState({
     name: "",
     mobile: "",
@@ -32,9 +29,6 @@ const SignupForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const navigateToSignIn = () => {
-    navigate("/signin");
-  };
   const updateHandleChange = (event) => {
     // setErrors(Validation(signupData));
 

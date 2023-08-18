@@ -1,11 +1,10 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,

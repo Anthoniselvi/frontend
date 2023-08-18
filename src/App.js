@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import { ColorModeContext } from "./theme";
@@ -8,7 +8,6 @@ import { useMode } from "./theme";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Sidebar from "./pages/Sidebar/Sidebar";
 import { useUserAuth } from "./auth";
 import EventsPage from "./pages/Events/EventsPage";
 import CreateEvent from "./pages/Events/CreateEvent";
@@ -21,7 +20,6 @@ import VerifyEmail from "./components/Login/VerifyEmail";
 function App() {
   const auth = useUserAuth();
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
 
   useEffect(() => {
     console.log("Auth-User useEffect : " + JSON.stringify(auth.user));
