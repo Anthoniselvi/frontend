@@ -1,11 +1,13 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Input, Typography, useMediaQuery } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import Sidebar from "../Sidebar/Sidebar";
 import "./Profile.css";
 import axios from "axios";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -16,6 +18,10 @@ export default function Profile() {
   const [searchParam] = useSearchParams();
   const profileId = searchParam.get("profile");
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
+
+  const navigateToNewEventPage = () => {
+    navigate("/eventpage");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

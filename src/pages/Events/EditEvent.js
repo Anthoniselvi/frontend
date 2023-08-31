@@ -97,14 +97,176 @@ export default function EditEvent({ open, onClose, eventId, eventName }) {
             paddingRight: "5%",
           }}
         >
-          <DialogTitle variant="h4">Edit</DialogTitle>
+          <DialogTitle variant="h4" color="#DA344D">
+            Edit
+          </DialogTitle>
           <DeleteOutlineOutlined
             onClick={() => handleDeleteEvent(eventId)}
-            sx={{ fontSize: 20, cursor: "pointer" }}
+            sx={{ fontSize: 20, cursor: "pointer", color: "#DA344D" }}
           />
         </Box>
         <DialogContent>
-          <form>
+          <form
+            onSubmit={handleEditSave}
+            style={{
+              margin: "5% 0%",
+              width: "300px",
+              // width: isMobile ? "100%" : "60%",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <label
+                // for="eventType"
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "13px",
+                  lineHeight: "18px",
+                  color: "#101a34",
+                  fontWeight: 600,
+                }}
+              >
+                Event Type:
+              </label>
+              <select
+                style={{
+                  background: "#fff",
+                  borderRadius: "7px",
+                  width: "100%",
+                  height: "44px",
+                  padding: "8px 15px",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  color: "#101a34",
+                  border: "1px solid #cad3dd",
+                  fontFamily: "Poppins",
+                }}
+                value={eventType}
+                onChange={(e) => setEventType(e.target.value)}
+              >
+                <option>Select Event Type</option>
+                <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday</option>
+                <option value="baby">Baby Shower</option>
+                <option value="house">House Warming</option>
+                <option value="others">Others</option>
+              </select>
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <label
+                // for="name"
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "13px",
+                  lineHeight: "18px",
+                  color: "#101a34",
+                  fontWeight: 600,
+                }}
+              >
+                Event Name:
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                style={{
+                  background: "#fff",
+                  borderRadius: "7px",
+                  width: "100%",
+                  height: "44px",
+                  padding: "8px 15px",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  color: "#101a34",
+                  border: "1px solid #cad3dd",
+                  fontFamily: "Poppins",
+                }}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <label
+                // for="place"
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "13px",
+                  lineHeight: "18px",
+                  color: "#101a34",
+                  fontWeight: 600,
+                }}
+              >
+                Place:
+              </label>
+              <input
+                type="text"
+                id="place"
+                name="place"
+                style={{
+                  background: "#fff",
+                  borderRadius: "7px",
+                  width: "100%",
+                  height: "44px",
+                  padding: "8px 15px",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  color: "#101a34",
+                  border: "1px solid #cad3dd",
+                  fontFamily: "Poppins",
+                }}
+                value={place}
+                onChange={(e) => setPlace(e.target.value)}
+              />
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <label
+                // for="eventName"
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "13px",
+                  lineHeight: "18px",
+                  color: "#101a34",
+                  fontWeight: 600,
+                }}
+              >
+                Date:
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                style={{
+                  background: "#fff",
+                  borderRadius: "7px",
+                  width: "100%",
+                  height: "44px",
+                  padding: "8px 15px",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "20px",
+                  color: "#101a34",
+                  border: "1px solid #cad3dd",
+                  fontFamily: "Poppins",
+                }}
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+          </form>
+          {/* <form>
             <FormControl
               fullWidth
               sx={{
@@ -235,11 +397,11 @@ export default function EditEvent({ open, onClose, eventId, eventName }) {
             />
             <br />
             <br />
-          </form>
+          </form> */}
         </DialogContent>
         <DialogActions>
           <Button
-            sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+            sx={{ backgroundColor: "#ff574d", fontSize: "13px" }}
             type="submit"
             color="secondary"
             variant="contained"
@@ -248,7 +410,7 @@ export default function EditEvent({ open, onClose, eventId, eventName }) {
             CANCEL
           </Button>
           <Button
-            sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+            sx={{ backgroundColor: "#56c984", fontSize: "13px" }}
             type="submit"
             color="secondary"
             variant="contained"

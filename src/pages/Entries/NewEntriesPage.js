@@ -1,8 +1,16 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
-
+import {
+  Box,
+  Typography,
+  useTheme,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
+import { tokens } from "../../theme";
 import { useState, useEffect, createContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
+
+import { Delete } from "@mui/icons-material";
 import CreateEntry from "./CreateEntry";
 import EditEntry from "./EditEntry";
 import DeleteEntry from "./DeleteEntry";
@@ -13,6 +21,8 @@ export const RefreshContext = createContext({
   updateRefreshCount: () => {},
 });
 const NewEntriesPage = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   const navigate = useNavigate();
   const [searchParam] = useSearchParams();
@@ -35,6 +45,14 @@ const NewEntriesPage = () => {
   function refreshPage() {
     updateRefreshCount();
   }
+  const createEntry = () => {
+    setCreateModalOpen(true);
+  };
+  const handleDeleteEntry = (e, entryId) => {
+    e.stopPropagation();
+    setDeleteModalOpen(true);
+    setSelectedRowId(entryId);
+  };
 
   const handleEditEntry = (entryId) => {
     setEditModalOpen(true);

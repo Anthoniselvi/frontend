@@ -1,5 +1,5 @@
 .footer-container{
-    background-color: #22222a;
+    background-color: #DA344D;
     width: 100vw;
     padding: 5%;
   
@@ -12,8 +12,15 @@
     gap: 10%;
     align-items: top;
 }
-.footer-leftcolumn h1, .footer-leftcolumn h3{
-   color: #fff;
+
+.footer-leftcolumn h1{
+  font-size: 30px;
+  color: #fff;
+}
+.footer-leftcolumn h3{
+  font-size: 18px;
+  color: #fff;
+  font-weight: normal;
 }
 .footer-rightcolumn{
   display: flex;
@@ -98,13 +105,13 @@
   }
 
   .footer-button:hover {
-    background-color: #50bcd9;
-    color: #101a34;
+    background-color: #f59f2f;
+    color: #DA344D;
   }
   .footer1-button {
   
-    background: #50bcd9;
-    color: #fff;
+    background: #f59f2f;
+    color: #DA344D;
  
     width: 170px;
     height: 40px;

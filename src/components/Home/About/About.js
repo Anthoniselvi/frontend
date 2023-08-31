@@ -30,7 +30,7 @@ export default function About() {
         >
           <path
             style={{ width: "100vw", height: "100vh" }}
-            fill="#b7e5fc"
+            fill="#DA344D"
             d="M0,256L1440,128L1440,0L0,0Z"
           />
         </svg>

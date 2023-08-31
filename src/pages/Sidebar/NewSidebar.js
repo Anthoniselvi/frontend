@@ -6,11 +6,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles"; // Step 1: Import useTheme
@@ -168,7 +171,7 @@ function NewSidebar(props) {
             zIndex: 7000,
             background: "#fff",
             color: "#101a34",
-            borderBottom: "1px solid #50bcd9",
+            borderBottom: "0.5px solid #bf1110",
           }}
         >
           <Toolbar>
@@ -194,7 +197,7 @@ function NewSidebar(props) {
                 >
                   <RiMenu2Line
                     // onClick={handleMenuClicked}
-                    style={{ fontSize: "25px" }}
+                    style={{ fontSize: "25px", color: "#bf1110" }}
                     //   className="Icon"
                   />
                 </IconButton>
@@ -220,8 +223,9 @@ function NewSidebar(props) {
                   }}
                 >
                   <ImCross
-                  // onClick={handleMenuClicked}
-                  // className="Icon"
+                    style={{ color: "#bf1110" }}
+                    // onClick={handleMenuClicked}
+                    // className="Icon"
                   />{" "}
                 </IconButton>
               </Box>
@@ -238,7 +242,12 @@ function NewSidebar(props) {
                 variant="h4"
                 noWrap
                 component="div"
-                sx={{ textAlign: "center" }}
+                sx={{
+                  textAlign: "center",
+                  color: "#bf1110",
+                  fontWeight: 600,
+                  fontSize: 30,
+                }}
               >
                 MOI APP
               </Typography>
@@ -273,16 +282,16 @@ function NewSidebar(props) {
               color: "#101a34",
             },
             "& .MuiTypography-root": {
-              fontSize: 13,
+              fontSize: 18,
             },
             "& .MuiListItem-root": {
-              fontSize: 13,
+              fontSize: 18,
               color: "#101a34",
               fontWeight: 500,
               lineHeight: 18,
             },
             "& .MuiSvgIcon-root": {
-              fontSize: 13,
+              fontSize: 20,
               color: "#101a34",
               fontWeight: 500,
               lineHeight: 18,
@@ -304,6 +313,7 @@ function NewSidebar(props) {
               textAlign: "center",
               alignItems: "center",
               fontWeight: 600,
+              fontSize: "20px",
             },
             "& .MuiListItemIcon-root:hover": {
               color: "#bf1110",
@@ -342,17 +352,17 @@ function NewSidebar(props) {
               fontSize: 20,
             },
             "& .MuiTypography-root": {
-              fontSize: 13,
+              fontSize: 18,
               fontWeight: 600,
             },
             "& .MuiListItem-root": {
-              fontSize: 13,
+              fontSize: 18,
               fontWeight: 600,
               color: "#101a34",
               lineHeight: 18,
             },
             "& .MuiSvgIcon-root": {
-              fontSize: 13,
+              fontSize: 18,
               color: "#101a34",
               fontWeight: 500,
               lineHeight: 18,
@@ -382,10 +392,10 @@ function NewSidebar(props) {
               color: "#bf1110",
               // background: "#feeae9",
             },
-            // "& .MuiListItemButton-root.selected": {
-            //   color: "#bf1110",
-            //   background: "#feeae9",
-            // },
+            "& .MuiListItemButton-root.selected": {
+              color: "#bf1110",
+              background: "#feeae9",
+            },
             "& .MuiListItemIcon-root.selected": {
               color: "#bf1110",
               // background: "#feeae9",

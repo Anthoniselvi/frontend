@@ -53,6 +53,8 @@ export default function EventsList({ eventslist }) {
           minHeight: "80vh",
           width: "100%",
           display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
           gap: "2%",
           // flexWrap: 'wrap',
           // justifyContent: "space-between",
@@ -65,7 +67,7 @@ export default function EventsList({ eventslist }) {
           sx={{
             height: "250px",
             // width: '30%',
-            width: isNonMobile ? "25%" : "100%",
+            width: isNonMobile ? "30%" : "100%",
             marginBottom: isNonMobile ? undefined : "5%",
             border: "1px solid #feeae9",
             borderRadius: "10px",
@@ -75,9 +77,10 @@ export default function EventsList({ eventslist }) {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#feeae9",
-            // backgroundColor: "#f5f7fa",
+
             "&:hover": {
-              backgroundColor: "#bf1110",
+              // backgroundColor: "#bf1110",
+              backgroundColor: "#DA344D",
               // " #C21010",
               // #50bcd9
               color: "#ffffff",
@@ -114,7 +117,7 @@ export default function EventsList({ eventslist }) {
               position: "relative",
               height: "250px",
               // width: '30%',
-              width: isNonMobile ? "25%" : "100%",
+              width: isNonMobile ? "30%" : "100%",
               border: "1px solid #feeae9",
               borderRadius: "10px",
               display: "flex",
@@ -123,7 +126,7 @@ export default function EventsList({ eventslist }) {
               alignItems: "center",
               justifyContent: "center",
               "&:hover": {
-                backgroundColor: "#bf1110",
+                backgroundColor: "#DA344D",
                 // "#50bcd9",
                 color: "#ffffff",
                 "& .MuiTypography-root, & .MuiSvgIcon-root": {
@@ -215,7 +218,7 @@ export default function EventsList({ eventslist }) {
                   left: "90%",
                   transform: "translate(-50%, -50%)",
                   zIndex: 1,
-                  backgroundColor: "#bf1110",
+                  backgroundColor: "#DA344D",
                   padding: "5px",
                   borderRadius: "50%",
                   cursor: "pointer",

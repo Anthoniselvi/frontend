@@ -2,7 +2,7 @@ import React from "react";
 // import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import "./SubWorks.css";
-
+import DoneIcon from "@mui/icons-material/Done";
 export default function SubWorks() {
   //   const navigate = useNavigate();
 
@@ -16,14 +16,18 @@ export default function SubWorks() {
           <h2 className="subworks-heading">Easily track your gifts</h2>
           <div className="subworks-content-container">
             <div className="subworks-content-box">
-              <img className="subworks-img" src="/img/check.png" />
+              <div className="subworks-img">
+                <DoneIcon style={{ fontSize: 20 }} />
+              </div>
+              {/* <img className="subworks-img" src="/img/check.png" /> */}
               <h4 className="subworks-content-text">
                 Track your full history of received gifts.
               </h4>
             </div>
             <div className="subworks-content-box">
-              {/* <CheckCircleOutlineIcon sx={{ color: "#50bcd9" }} />  */}
-              <img className="subworks-img" src="/img/check.png" />
+              <div className="subworks-img">
+                <DoneIcon style={{ fontSize: 20 }} />
+              </div>
 
               <h4 className="subworks-content-text">
                 Never miss someone from the giftbook.

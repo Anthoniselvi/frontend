@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import { Box, Typography, TextField, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import "./SearchStyle.css";
 
 export default function SearchTable({ searchResult, eventsList }) {

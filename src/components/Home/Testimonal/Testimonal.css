@@ -57,9 +57,9 @@
     border-radius: 50%;
     font-size: 22px;
     font-weight: 600;
-    color: #5d9bb1;
+    color: #f59f2f;
    font-family: Poppins;
-    background-color: #ceeff4;
+    background-color: #DA344D;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,7 +85,7 @@
     font-size: 15px;
     line-height: 20px;
     font-family: Poppins;
-    color: #5d9bb1;
+    color: #DA344D;
     text-align: center;
   }
   

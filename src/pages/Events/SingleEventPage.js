@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Box, Typography, Button, useMediaQuery } from "@mui/material";
+import Sidebar from "../Sidebar/Sidebar";
 import axios from "axios";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
+import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { BiEdit, BiShareAlt, BiDownload } from "react-icons/bi";
+import EntriesPage from "../Entries/EntriesPage";
 import { PrintEvent } from "./PrintEvent";
 import EditEvent from "./EditEvent";
 import CreateEntry from "../Entries/CreateEntry";
+import NewEntriesPage from "../Entries/NewEntriesPage";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import EntriesTable from "../Entries/EntriesTable";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import {
+  PDFDownloadLink,
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+} from "@react-pdf/renderer";
 
 export default function SingleEventPage() {
   const [entries, setEntries] = useState([]);
@@ -124,7 +136,7 @@ export default function SingleEventPage() {
             height: "10%",
             width: "100%",
             padding: "2% 0%",
-            paddingBottom: "5%",
+            paddingBottom: "2%",
             borderBottom: "1px solid #cad3dd",
           }}
         >
@@ -352,19 +364,19 @@ export default function SingleEventPage() {
             minHeight: "70vh",
             borderRadius: "10px",
             border: "1px solid #cad3dd",
-            marginTop: "5%",
+            marginTop: "2%",
             backgroundColor: "#fff",
           }}
         >
           <Box
             sx={{
-              height: "10%",
+              height: "15%",
               width: "100%",
               borderBottom: "1px solid #cad3dd",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "0% 2%",
+              padding: "1% 2%",
             }}
           >
             <Typography
@@ -423,8 +435,6 @@ export default function SingleEventPage() {
               display: "flex",
             }}
           >
-            {/* <EntriesPage /> */}
-            {/* <NewEntriesPage /> */}
             <EntriesTable />
           </Box>
         </Box>

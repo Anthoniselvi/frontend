@@ -110,6 +110,17 @@ const Navbar = () => {
             background: "#fff",
             color: "black",
           },
+          "& .MuiTypography-root": {
+            fontSize: "16px !important",
+            marginLeft: "-15px",
+          },
+          "& .MuiTypography-root:hover": {
+            color: "#DA344D",
+          },
+          "& .MuiSvgIcon-root": {
+            fontSize: "20px",
+            color: "#bfc2c7",
+          },
         }}
       >
         <Box
@@ -125,8 +136,14 @@ const Navbar = () => {
             {menuOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
                 <ListItemButton onClick={item.link}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemIcon className="item-icon">
+                    {item.icon}{" "}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    sx={{ fontSize: "16px" }}
+                    className="item-text"
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -144,14 +161,14 @@ const Navbar = () => {
           >
             <button
               className="primary1-button"
-              style={{ width: "100%" }}
+              style={{ width: "100%", border: "1px solid #DA344D" }}
               onClick={navigateToLogin}
             >
               Login
             </button>
             <button
               className="primary-button"
-              style={{ width: "100%" }}
+              style={{ width: "100%", backgroundColor: "#DA344D" }}
               onClick={navigateToSignUp}
             >
               Sign Up

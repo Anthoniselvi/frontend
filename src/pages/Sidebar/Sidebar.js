@@ -7,8 +7,19 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
-
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { ImCross } from "react-icons/im";
+import { RiMenu2Line } from "react-icons/ri";
 import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
+import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 
 const Sidebar = ({ profileId }) => {
   console.log("ProfileId in Sidebar :" + profileId);
@@ -48,6 +59,9 @@ const Sidebar = ({ profileId }) => {
       // link: "#works",
     },
   ];
+  const handleMenuClicked = () => {
+    setOpenMenu(!openMenu);
+  };
 
   const handleMenuItemClick = (index) => {
     setCurrentLink(index);

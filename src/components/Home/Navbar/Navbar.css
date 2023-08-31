@@ -61,7 +61,7 @@
   .primary-button {
     border-radius: 8px;
     padding: 10px 24px;
-    background-color: #101a34;
+    background-color: #DA344D;
     color: #fff;
     outline: none;
     border: none;
@@ -78,17 +78,17 @@
   }
   .primary-button:hover {
     /* background-color: rgb(234, 234, 234); */
-    background-color: #50bcd9;
-    color: #fff;
+    background-color: #f59f2f;
+    color: #DA344D;
   }
   .primary1-button {
     border-radius: 8px;
     padding: 10px 24px;
     background-color: #fff;
-    color: #50bcd9;
-    border: 1px solid #50bcd9;
+    color: #101a34;
+    border: 1px solid #f59f2f;
     outline: none;
-    border: none;
+    border: 1px solid #DA344D;
     font-family: "Poppins";
     font-size: 13px;
     cursor: pointer;
@@ -100,8 +100,9 @@
     margin-left: 20px;
   }
   .primary1-button:hover {
-    background-color: #50bcd9;
-    color: #fff;
+    background-color: #f59f2f;
+    color: #DA344D;
+    border: none;
   }
   .navbar-menu-container svg {
     font-size: 1.5rem;
@@ -193,7 +194,7 @@
     color: #50bcd9;
     border: 1px solid #50bcd9;
     outline: none;
-    border: none;
+    border: 1px solid #DA344D;
     font-family: "Poppins";
     font-size: 13px;
     cursor: pointer;
@@ -257,6 +258,11 @@
      
     }
   }
-  
+  .item-icon{
+    font-size: 18px;
+  }
+  .item-text{
+    font-size: 18px;
+  }
   
   

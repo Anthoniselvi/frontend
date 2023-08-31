@@ -96,7 +96,7 @@ export default function NewSearch({ searchResult, eventsList }) {
           backgroundColor: "#fafbfd",
           color: "#101a34",
           fontWeight: 600,
-          fontSize: 11,
+          fontSize: 15,
           lineHeight: 18,
           borderTop: "1px solid #cad3dd",
           borderBottom: "1px solid #cad3dd",

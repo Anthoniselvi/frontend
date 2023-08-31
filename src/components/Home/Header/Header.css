@@ -36,9 +36,10 @@
   }
   @media (max-width: 1000px) {
     .firstpage-container{
-      height:60vh;
+      height:100%;
       padding: 5%;
-     
+      padding-top: 20%;
+     border: none;
     }
     .home-text-section {
       gap:15px;
@@ -57,7 +58,7 @@
     }
     .secondary-button{
       width: 100%;
-      border:1px solid red;
+      /* border:1px solid red; */
     }
   }
   .primary-text {
@@ -93,15 +94,15 @@
     font-weight: 600;
     font-size: 15px;
     line-height: 22px;
-    color: #fff;
+    color: #DA344D;
     display: inline-block;
     padding: 12px 20px;
     gap: 10px;
     /* max-width: 201px; */
     height: 46px;
-    background: #bf1110;
+    background: #f59f2f;
     border-radius: 7px;
-    border: 1px solid #bf1110;
+    /* border: 1px solid #bf1110; */
   }
   /* .secondary-button svg {
     margin-left: 0.75rem;
@@ -109,6 +110,6 @@
   } */
   .secondary-button:hover {
     background-color: #fff;
-    border: 1px solid #bf1110;
-    color: #bf1110;
+    border: 1px solid #DA344D;
+    color: #DA344D;
   }

@@ -1,5 +1,5 @@
 .faq-container{
-    height: 100vh;
+    height: 100%;
         width: 100vw;
         padding: 5%;
         background-color: #fff;
@@ -9,30 +9,46 @@
         gap:10%;
 }
 .faq-heading{
-    text-align: center
+    font-size: 30px;
+    text-align: center;
+    color: #101a34;
+            font-weight: 600;
+            font-family: Poppins;
 }
 .accord-container{
-    background-color: #fff; color: #121212 ;
+    background-color: yellow ; color: #121212 ;
  
 }
+.MuiAccordion-root.accord-container {
+    background-color: #fff;
+    color: #121212;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 2% 0%;
+  }
 .accord-subhead{
-    
+    font-family: Poppins;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 20px;
     color: #101828;
 }
-.account-para{
+.accord-para{
+    font-family: Poppins;
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
-    color: #5e6577;
+    color:#5e6577;
 }
+
 .faq-content{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap:10%;
-    padding: 0% 20%;
+    gap:5%;
+    padding: 2% 10%;
 }
 @media (max-width: 1000px) {
     .faq-container{

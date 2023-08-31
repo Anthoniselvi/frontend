@@ -1,22 +1,31 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
 // import "./SearchStyle.css";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
+import { Delete, Edit } from "@mui/icons-material";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import DeleteEntry from "./DeleteEntry";
 import EditEntry from "./EditEntry";
+import NewEntriesPage from "./NewEntriesPage";
 import EntriesPage from "./EntriesPage";
 export default function EntriesTable() {
   const isNonMobile = useMediaQuery("(max-width: 1000px)");
-
+  const navigate = useNavigate();
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
   const [entries, setEntries] = useState([]);
   const [eventsList, setEventsList] = useState({});
+  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState();
@@ -94,21 +103,21 @@ export default function EntriesTable() {
           <Box
             onClick={() => handleEditEntry(row.entryId)}
             sx={{
-              border: "1px solid #56c984",
+              // border: "1px solid #56c984",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "10px",
+              gap: "5px",
               cursor: "pointer",
               padding: "5px 10px",
-              borderRadius: "5px",
-              background: "#56c984",
-              color: "#fff",
+              // borderRadius: "5px",
+              // background: "#56c984",
+              // color: "#fff",
               "&:hover": {
-                transition: "0.3s ease",
-                transform: "scale(0.9)",
-                background: "#fafbfd",
-                color: "#56c984",
+                // transition: "0.3s ease",
+                // transform: "scale(0.9)",
+                // background: "#fafbfd",
+                // color: "#56c984",
               },
             }}
           >
@@ -130,21 +139,21 @@ export default function EntriesTable() {
           <Box
             onClick={(e) => handleDeleteEntry(e, row.entryId)}
             sx={{
-              border: "1px solid #ff574d",
+              // border: "1px solid #ff574d",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "10px",
+              gap: "5px",
               cursor: "pointer",
               padding: "5px 10px",
               borderRadius: "5px",
-              background: "#ff574d",
-              color: "#fff",
+              // background: "#ff574d",
+              // color: "#fff",
               "&:hover": {
-                transition: "0.3s ease",
-                transform: "scale(0.9)",
-                color: "#ff574d",
-                background: "#fafbfd",
+                // transition: "0.3s ease",
+                // transform: "scale(0.9)",
+                // color: "#ff574d",
+                // background: "#fafbfd",
               },
             }}
           >
@@ -189,10 +198,12 @@ export default function EntriesTable() {
             },
             "& .MuiDataGrid-cell": {
               borderBottom: " 1px solid #e8ecf1",
+              borderTop: " 1px solid #e8ecf1",
               fontSize: "15px",
               lineHeight: "19px",
               color: "#101a34",
               alignItems: "left",
+              // height: "150px",
             },
             "& .name-column--cell": {
               color: "red",
@@ -236,8 +247,9 @@ export default function EntriesTable() {
               color: "black",
             },
             "& .MuiDataGrid-row": {
-              paddingTop: "40px",
-              paddingBottom: "40px",
+              // paddingTop: "40px",
+              // paddingBottom: "40px",
+              // textAlign: "center",
             },
             "& .MuiDataGrid-row:hover": {
               // backgroundColor: "#e0e0e0",

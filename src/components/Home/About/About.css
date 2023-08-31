@@ -29,10 +29,12 @@ object-fit: cover;
   }
   @media (max-width: 1000px) {
     .about-container{
-      background-color: #b7e5fc;
-      padding-top: 10%;
-height: 40vh;
+      background-color: #DA344D;
+      margin-top: -3%;
+      padding-top: 20%;
+height: 35vh;
 width: 100%;
+border: none;
     }
     .image-container{
       /* margin-top: -10%; */

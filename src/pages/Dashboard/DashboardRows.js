@@ -2,19 +2,30 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { Box, Typography, useMediaQuery } from "@mui/material";
-
+import {
+  Box,
+  Button,
+  IconButton,
+  TextField,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import { tokens } from "../../theme";
 import AllInboxIcon from "@mui/icons-material/AllInbox";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import StatBox1 from "../../components/StatBox/StatBox1";
 import StatBox2 from "../../components/StatBox/StatBox2";
 import StatBox3 from "../../components/StatBox/StatBox3";
+import NewBar from "../../components/Chart/Newbar";
 import Example from "../../components/Chart/BarChart";
 import NewSearch from "../../components/Chart/NewSearch";
+import SearchTable from "../../components/Chart/SearchTable";
 export default function DashboardRows() {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const [searchParam] = useSearchParams();
   const profileId = searchParam.get("profile");
@@ -26,6 +37,7 @@ export default function DashboardRows() {
   const [totalGift, setTotalGift] = useState(0);
   const [maxAmount, setMaxAmount] = useState({});
   const [maxAmountEvent, setMaxAmountEvent] = useState({});
+  const [inputValue, setInputValue] = useState("");
 
   const navigateToEvents = () => {
     navigate(`/eventslist?profile=${profileId}`);

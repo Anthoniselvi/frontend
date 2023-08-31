@@ -1,8 +1,10 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 import Validation from "./Validation";
 import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
@@ -16,7 +18,8 @@ const SignupForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
   // const {role, setRole, isLoggedIn, setIsLoggedIn, logout} = useAuthContext()
   const { googleSignIn, user } = useUserAuth();
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [signupData, setSignupData] = useState({
     name: "",
     mobile: "",
@@ -29,6 +32,9 @@ const SignupForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const navigateToSignIn = () => {
+    navigate("/signin");
+  };
   const updateHandleChange = (event) => {
     // setErrors(Validation(signupData));
 
@@ -93,7 +99,7 @@ const SignupForm = () => {
     try {
       await googleSignIn();
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/profile`, {
+        .post(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
           profileId: user.uid,
           name: user.displayName,
           email: user.email,
@@ -347,16 +353,16 @@ const SignupForm = () => {
         <Button
           type="submit"
           sx={{
-            backgroundColor: "#50bcd9",
+            backgroundColor: "#DA344D",
             color: "#ffffff",
             fontSize: "16px",
             fontWeight: 600,
             // padding: "10px 20px",
             width: "100%",
             "&:hover ": {
-              backgroundColor: "#f0f2f5",
-              color: "#50bcd9",
-              border: "1px solid #50bcd9",
+              backgroundColor: "#f59f2f",
+              color: "#DA344D",
+              // border: "1px solid #DA344D",
             },
           }}
         >
@@ -384,9 +390,13 @@ const SignupForm = () => {
                 </Link>
               </Grid> */}
           <Grid item>
-            <Link href="/login" to="/login" sx={{ color: "#5e6577" }}>
+            <Link
+              href="/login"
+              to="/login"
+              sx={{ color: "#5e6577", fontSize: 15 }}
+            >
               Already have an account?{" "}
-              <span style={{ color: "rgb(80, 188, 217)", fontWeight: 400 }}>
+              <span style={{ color: "#DA344D", fontSize: 15, fontWeight: 400 }}>
                 Login
               </span>
             </Link>

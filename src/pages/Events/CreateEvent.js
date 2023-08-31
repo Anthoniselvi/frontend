@@ -1,9 +1,10 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Input, Typography, useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 // import "./styles.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import Sidebar from "../Sidebar/Sidebar";
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [eventType, setEventType] = useState("");

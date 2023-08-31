@@ -16,6 +16,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { RefreshContext } from "./EntriesPage";
 // import { RefreshContext } from "./Entries";
 // import { RefreshContext } from "./index";
 
@@ -26,10 +27,10 @@ export default function CreateEntry({ open, onClose, eventId }) {
   const [amount, setAmount] = useState(0);
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("amount");
-  //    const { updateRefreshCount } = useContext(RefreshContext);
+  const { updateRefreshCount } = useContext(RefreshContext);
 
   function refreshPage() {
-    // updateRefreshCount();
+    updateRefreshCount();
   }
 
   const handleClose = () => {
@@ -63,7 +64,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
     setAmount("");
     setGift("");
     onClose();
-    //   refreshPage();
+    refreshPage();
   };
 
   return (
@@ -71,192 +72,225 @@ export default function CreateEntry({ open, onClose, eventId }) {
       open={open}
       PaperProps={{ sx: { backgroundColor: "#fff", color: "#121212" } }}
     >
-      <DialogTitle textAlign="center" variant="h4">
-        Create
+      <DialogTitle textAlign="center" variant="h4" color="#DA344D">
+        CREATE
       </DialogTitle>
       <DialogContent>
         <form style={{ paddingTop: 2 }}>
-          <TextField
-            fullWidth
-            sx={{
-              // width: "300px",
-              // margin: "5px",
-              "& > div": { width: isNonMobile ? "300px" : "250px" },
-              "& .MuiFormLabel-root": {
-                color: "#121212",
-              },
-              "& .MuiInputBase-root": {
-                color: "#121212",
-              },
-              "& .MuiMenuItem-root": {
-                backgroundColor: "#fff",
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "green",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "blue",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "purple",
-              },
-              "& .MuiSelect-icon": {
-                color: "#121212",
-              },
-            }}
-            type="text"
-            label="Person Name"
-            variant="outlined"
-            value={personName}
-            onChange={(e) => setPersonName(e.target.value)}
-          />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
+            <label
+              // for="place"
+              style={{
+                fontFamily: "Poppins",
+                fontSize: "13px",
+                lineHeight: "18px",
+                color: "#101a34",
+                fontWeight: 600,
+              }}
+            >
+              Person Name:
+            </label>
+            <input
+              type="text"
+              id="place"
+              name="place"
+              style={{
+                background: "#fff",
+                borderRadius: "7px",
+                width: "100%",
+                height: "44px",
+                padding: "8px 15px",
+                fontWeight: 400,
+                fontSize: "16px",
+                lineHeight: "20px",
+                color: "#101a34",
+                border: "1px solid #cad3dd",
+                fontFamily: "Poppins",
+              }}
+              value={personName}
+              onChange={(e) => setPersonName(e.target.value)}
+            />
+          </div>
           <br />
           <br />
-          <TextField
-            fullWidth
-            sx={{
-              // width: "300px",
-              // margin: "5px",
-              "& > div": { width: isNonMobile ? "300px" : "250px" },
-              "& .MuiFormLabel-root": {
-                color: "#121212",
-              },
-              "& .MuiInputBase-root": {
-                color: "#121212",
-              },
-              "& .MuiMenuItem-root": {
-                backgroundColor: "#fff",
-              },
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "green",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "blue",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "purple",
-              },
-              "& .MuiSelect-icon": {
-                color: "#121212",
-              },
-            }}
-            type="text"
-            label="City"
-            variant="outlined"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
+            <label
+              // for="place"
+              style={{
+                fontFamily: "Poppins",
+                fontSize: "13px",
+                lineHeight: "18px",
+                color: "#101a34",
+                fontWeight: 600,
+              }}
+            >
+              City:
+            </label>
+            <input
+              type="text"
+              id="place"
+              name="place"
+              style={{
+                background: "#fff",
+                borderRadius: "7px",
+                width: "100%",
+                height: "44px",
+                padding: "8px 15px",
+                fontWeight: 400,
+                fontSize: "16px",
+                lineHeight: "20px",
+                color: "#101a34",
+                border: "1px solid #cad3dd",
+                fontFamily: "Poppins",
+              }}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
           <br />
           <br />
-          <FormControl
-            fullWidth
-            sx={{
-              // width: "300px",
-              // margin: "5px",
-              "& > div": { width: isNonMobile ? "300px" : "250px" },
-              "& .MuiFormLabel-root": {
-                color: "#121212",
-              },
-              "& .MuiRadio-root": {
-                color: "#121212",
-              },
+          <div
+            style={{
+              width: "300px",
+              margin: "5px",
             }}
           >
-            <FormLabel
-              fullWidth
-              id="demo-controlled-radio-buttons-group"
-              // style={{ width: "300px", margin: "5px" }}
+            <label
+              htmlFor="demo-controlled-radio-buttons-group"
+              style={{
+                width: "300px",
+                margin: "5px",
+                fontFamily: "Poppins",
+                fontSize: "13px",
+                lineHeight: "18px",
+                color: "#101a34",
+                fontWeight: 600,
+              }}
             >
               Type of Presentation :
-            </FormLabel>
+            </label>
             <br />
-            <RadioGroup
-              value={presentType}
-              onChange={(e) => setPresentType(e.target.value)}
-            >
-              {/* <div className="radio-button"> */}
-              <FormControlLabel
-                control={<Radio />}
-                label="Amount"
-                value="amount"
-
-                // defaultChecked={selected === "amount"}
-                // onChange={(e) => setSelected(e.target.value)}
-              />
-              <FormControlLabel
-                control={<Radio />}
-                label="Gift"
-                value="gift"
-
-                // defaultChecked={selected === 0}
-                // onChange={(e) => setSelected(e.target.value)}
-              />
-              <br />
-
-              {/* </div> */}
-              {presentType === "amount" ? (
-                // <div>
-                <TextField
-                  fullWidth
-                  sx={{
-                    // width: "300px",
-                    // margin: "5px",
-                    "& > div": { width: isNonMobile ? "300px" : "250px" },
-                    "& .MuiInputLabel-root": { color: "#121212" },
-                    "& .MuiInputBase-input": {
-                      color: "#121212",
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "green",
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "blue",
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "purple",
-                    },
+            <br />
+            <br />
+            <div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <input
+                  type="radio"
+                  id="amount"
+                  name="presentType"
+                  value="amount"
+                  style={{
+                    color: "#121212",
+                    width: "16px",
+                    height: "16px",
                   }}
-                  id="outlined-amount"
-                  label="Rs."
-                  onChange={(e) => setAmount(e.target.value)}
+                  checked={presentType === "amount"}
+                  onChange={() => setPresentType("amount")}
+                />
+                <label
+                  htmlFor="amount"
+                  style={{
+                    fontFamily: "Poppins",
+                    fontSize: "13px",
+                    lineHeight: "18px",
+                    color: "#101a34",
+                    fontWeight: 600,
+                  }}
+                >
+                  Amount
+                </label>
+              </div>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <input
+                  type="radio"
+                  id="gift"
+                  name="presentType"
+                  value="gift"
+                  style={{
+                    color: "#121212",
+                    width: "16px",
+                    height: "16px",
+                  }}
+                  checked={presentType === "gift"}
+                  onChange={() => setPresentType("gift")}
+                />
+                <label
+                  htmlFor="gift"
+                  style={{
+                    fontFamily: "Poppins",
+                    fontSize: "13px",
+                    lineHeight: "18px",
+                    color: "#101a34",
+                    fontWeight: 600,
+                  }}
+                >
+                  Gift
+                </label>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {presentType === "amount" ? (
+                <input
+                  type="text"
+                  id="amountInput"
+                  name="amount"
+                  style={{
+                    background: "#fff",
+                    borderRadius: "7px",
+                    width: "100%",
+                    height: "44px",
+                    padding: "8px 15px",
+                    fontWeight: 400,
+                    fontSize: "16px",
+                    lineHeight: "20px",
+                    color: "#101a34",
+                    border: "1px solid #cad3dd",
+                    fontFamily: "Poppins",
+                  }}
                   value={amount}
-                  // sx={{ width: "300px", marginBottom: "5%" }}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
               ) : (
-                // </div>
-                // <div className="gift-box">
-                <TextField
-                  fullWidth
-                  sx={{
-                    // width: "300px",
-                    // margin: "5px",
-                    "& > div": { width: isNonMobile ? "300px" : "250px" },
-                    "& .MuiInputLabel-root": { color: "#121212" },
-                    "& .MuiInputBase-input": {
-                      color: "#121212",
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "green",
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "blue",
-                    },
-                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: "purple",
-                    },
+                <textarea
+                  placeholder="Describe about Gift"
+                  type="text"
+                  id="gift"
+                  name="gift"
+                  style={{
+                    background: "#fff",
+                    borderRadius: "7px",
+                    width: "100%",
+                    height: "44px",
+                    padding: "8px 15px",
+                    fontWeight: 400,
+                    fontSize: "16px",
+                    lineHeight: "20px",
+                    color: "#101a34",
+                    border: "1px solid #cad3dd",
+                    fontFamily: "Poppins",
                   }}
-                  id="outlined-multiline-static"
-                  label="about gift"
-                  multiline
-                  // rows={4}
-                  // sx={{ width: "300px", marginBottom: "5%" }}
-                  onChange={(e) => setGift(e.target.value)}
                   value={gift}
+                  onChange={(e) => setGift(e.target.value)}
                 />
-                // </div>
               )}
-            </RadioGroup>
-          </FormControl>
+            </div>
+          </div>
 
           <br />
           <br />
@@ -264,7 +298,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
       </DialogContent>
       <DialogActions sx={{ p: "1.25rem" }}>
         <Button
-          sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+          sx={{ backgroundColor: "#ff574d", fontSize: "13px" }}
           type="submit"
           color="secondary"
           variant="contained"
@@ -273,7 +307,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
           Cancel
         </Button>
         <Button
-          sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+          sx={{ backgroundColor: "#56c984", fontSize: "13px" }}
           type="submit"
           color="secondary"
           variant="contained"

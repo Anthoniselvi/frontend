@@ -1,8 +1,10 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 import SigninValidation from "./SigninValidation";
 import { auth } from "../../firebase";
 import { useUserAuth } from "../../auth";
@@ -11,10 +13,15 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
+  // const {role, setRole, isLoggedIn, setIsLoggedIn, logout} = useAuthContext()
 
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const { googleSignIn, facebookSignIn, user } = useUserAuth();
 
@@ -28,6 +35,9 @@ const LoginForm = () => {
   const [error, setError] = useState("");
 
   const [dataIsCorrect, setDataIsCorrect] = useState(false);
+  const handlePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const handleChange = (event) => {
     setSigninData({
@@ -58,7 +68,7 @@ const LoginForm = () => {
     try {
       await googleSignIn();
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/profile`, {
+        .post(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
           profileId: user.uid,
           name: user.displayName,
           email: user.email,
@@ -75,13 +85,17 @@ const LoginForm = () => {
     }
   };
 
+  const navigateToResetPassword = () => {
+    navigate("/resetpassword");
+  };
+
   const handleFacebookSignIn = async (e) => {
     e.preventDefault();
 
     try {
       await facebookSignIn();
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/profile`, {
+        .post(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
           profileId: user.uid,
           name: user.displayName,
           email: user.email,
@@ -116,7 +130,7 @@ const LoginForm = () => {
           // variant="contained"s
           sx={{
             background: "#fff",
-            border: "1px solid #50bcd9",
+            border: "1px solid #DA344D",
             borderRadius: "4px",
             padding: "10px 17px",
             fontWeight: 500,
@@ -137,7 +151,7 @@ const LoginForm = () => {
           // variant="contained"
           sx={{
             background: "#fff",
-            border: "1px solid #50bcd9",
+            border: "1px solid #DA344D",
             borderRadius: "4px",
             padding: "10px 17px",
             fontWeight: 500,
@@ -280,7 +294,7 @@ const LoginForm = () => {
           type="submit"
           style={{
             marginTop: "10px",
-            backgroundColor: "#50bcd9",
+            backgroundColor: "#DA344D",
             color: "#ffffff",
             width: "100%",
             height: "44px",
@@ -294,14 +308,14 @@ const LoginForm = () => {
             cursor: "pointer",
           }}
           onMouseEnter={(e) => {
-            e.target.style.border = "1px solid #50bcd9";
-            e.target.style.backgroundColor = "#f0f2f5";
-            e.target.style.color = "#50bcd9";
+            // e.target.style.border = "1px solid #DA344D";
+            e.target.style.backgroundColor = "#f59f2f";
+            e.target.style.color = "#DA344D";
           }}
           onMouseLeave={(e) => {
             e.target.style.border = "none";
             e.target.style.color = "#ffffff";
-            e.target.style.backgroundColor = "#50bcd9";
+            e.target.style.backgroundColor = "#DA344D";
           }}
         >
           Sign In
@@ -317,12 +331,12 @@ const LoginForm = () => {
         width="100%"
       >
         <Grid container>
-          <Grid item xs sx={{ color: "rgb(80, 188, 217)" }}>
+          <Grid item xs sx={{ color: "#DA344D", fontSize: 15 }}>
             <Link
               to="/resetpassword"
               href="#"
               // onClick={navigateToResetPassword}
-              sx={{ color: "rgb(80, 188, 217)" }}
+              sx={{ color: "#DA344D" }}
             >
               Forgot password?
             </Link>
@@ -331,7 +345,7 @@ const LoginForm = () => {
           <Grid item>
             <Link href="signup" to="/signup" sx={{ color: "#5e6577" }}>
               Need to create an account?{" "}
-              <span style={{ color: "rgb(80, 188, 217)" }}>Sign Up</span>
+              <span style={{ color: "#DA344D", fontSize: 15 }}>Sign Up</span>
             </Link>
           </Grid>
         </Grid>

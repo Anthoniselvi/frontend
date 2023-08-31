@@ -9,15 +9,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
+import { RefreshContext } from "./EntriesPage";
 // import { RefreshContext } from "./Entries";
 
 export default function DeleteEntry({ entryId, open, onClose }) {
   const [personName, setPersonName] = useState();
-  //   const { updateRefreshCount } = useContext(RefreshContext);
+  const { updateRefreshCount } = useContext(RefreshContext);
 
   function refreshPage() {
     // window.location.reload(false);
-    // updateRefreshCount();
+    updateRefreshCount();
   }
   const handleClose = () => {
     onClose();
@@ -30,7 +31,7 @@ export default function DeleteEntry({ entryId, open, onClose }) {
         console.log("Deleted Parts :" + JSON.stringify(response));
       });
     onClose();
-    // refreshPage();
+    refreshPage();
   };
 
   const getSelectedEntry = () => {
