@@ -6,13 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import SigninValidation from "./SigninValidation";
-import { auth } from "../../firebase";
+
 import { useUserAuth } from "../../auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
+import { auth, db } from "../../firebase";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -55,33 +57,75 @@ const LoginForm = () => {
       .then(async (res) => {
         console.log(res);
         navigate(`/dashboard?profile=${res.user.uid}`);
-
-        // navigate(`/newdashboard?profile=${res.user.uid}`);
       })
       .catch((err) => {
         setError(err.message);
       });
   };
 
-  const handleGoogleSignin = async (e) => {
-    e.preventDefault();
+  const handleGoogleSignIn = async () => {
     try {
-      await googleSignIn();
-      axios
-        .post(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
+      const userCredential = await googleSignIn();
+      const user = userCredential.user; // Get the user from the userCredential
+
+      console.log("user : " + JSON.stringify(user));
+
+      // Update user profile in Firestore with Google login data
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+      });
+
+      // Make the POST request to add Google login data to profile
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/profile/add`,
+        {
           profileId: user.uid,
           name: user.displayName,
           email: user.email,
-        })
-        .then((response) => {
-          console.log(response);
-          console.log(response.data);
-          console.log(response.data.profileId);
-          navigate(`/dashboard?profile=${user.uid}`);
-          // navigate(`/newhome?profile=${user.uid}`);
-        });
+        }
+      );
+
+      console.log("response :" + JSON.stringify(response));
+      console.log(response.data);
+      console.log(response.data.profileId);
+
+      navigate(`/dashboard?profile=${user.uid}`);
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
+    }
+  };
+  const handleGoogleSignin = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await googleSignIn();
+      const user = userCredential.user; // Get the user from the userCredential
+
+      console.log("user : " + JSON.stringify(user));
+
+      // Update user profile in Firestore with Google login data
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+      });
+
+      // Make the POST request to add Google login data to profile
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/profile/add`,
+        {
+          profileId: user.uid,
+          name: user.displayName,
+          email: user.email,
+        }
+      );
+
+      console.log("response :" + JSON.stringify(response));
+      console.log(response.data);
+      console.log(response.data.profileId);
+
+      navigate(`/dashboard?profile=${user.uid}`);
+    } catch (error) {
+      console.error(error.message);
     }
   };
 

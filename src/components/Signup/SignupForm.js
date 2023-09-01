@@ -7,7 +7,7 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import Validation from "./Validation";
 import { auth, db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -17,7 +17,7 @@ import "./Signup.css";
 const SignupForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
   // const {role, setRole, isLoggedIn, setIsLoggedIn, logout} = useAuthContext()
-  const { googleSignIn, user } = useUserAuth();
+  const { googleSignIn, facebookSignIn, user } = useUserAuth();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [signupData, setSignupData] = useState({
@@ -95,23 +95,69 @@ const SignupForm = () => {
     });
   };
 
-  const handleClick = async () => {
+  const handleGoogleSignIn = async () => {
     try {
-      await googleSignIn();
-      axios
-        .post(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
+      const userCredential = await googleSignIn();
+      const user = userCredential.user; // Get the user from the userCredential
+
+      console.log("user : " + JSON.stringify(user));
+
+      // Update user profile in Firestore with Google login data
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+      });
+
+      // Make the POST request to add Google login data to profile
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/profile/add`,
+        {
           profileId: user.uid,
           name: user.displayName,
           email: user.email,
-        })
-        .then((response) => {
-          console.log(response);
-          console.log(response.data);
-          console.log(response.data.profileId);
-        });
+        }
+      );
+
+      console.log("response :" + JSON.stringify(response));
+      console.log(response.data);
+      console.log(response.data.profileId);
+
       navigate(`/dashboard?profile=${user.uid}`);
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    try {
+      const userCredential = await facebookSignIn();
+      const user = userCredential.user; // Get the user from the userCredential
+
+      console.log("user : " + JSON.stringify(user));
+
+      // Update user profile in Firestore with Google login data
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+      });
+
+      // Make the POST request to add Google login data to profile
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/profile/add`,
+        {
+          profileId: user.uid,
+          name: user.displayName,
+          email: user.email,
+        }
+      );
+
+      console.log("response :" + JSON.stringify(response));
+      console.log(response.data);
+      console.log(response.data.profileId);
+
+      navigate(`/dashboard?profile=${user.uid}`);
+    } catch (error) {
+      console.error(error.message);
     }
   };
   return (
@@ -131,7 +177,7 @@ const SignupForm = () => {
         <Button
           width={isNonMobile ? "100%" : "49%"}
           className="signup-form-button"
-          onClick={handleClick}
+          onClick={handleGoogleSignIn}
           type="submit"
           // variant="contained"s
           sx={{
@@ -153,7 +199,7 @@ const SignupForm = () => {
         <Button
           width={isNonMobile ? "100%" : "49%"}
           className="signup-form-button"
-          onClick={handleClick}
+          onClick={handleFacebookSignIn}
           type="submit"
           // variant="contained"
           sx={{

@@ -75,9 +75,9 @@ export default function DashboardRows() {
         setMaxAmountEvent(response.data.maxAmountEventList);
       });
   };
-  console.log("MaxAmount : " + maxAmount.amount);
-  console.log("MaxAmount Given By : " + maxAmount.personName);
-  console.log("MaxAmount Event Name : " + maxAmountEvent.name);
+  // console.log("MaxAmount : " + maxAmount.amount);
+  // console.log("MaxAmount Given By : " + maxAmount.personName);
+  // console.log("MaxAmount Event Name : " + maxAmountEvent.name);
 
   useEffect(() => {
     fetchTotals();
