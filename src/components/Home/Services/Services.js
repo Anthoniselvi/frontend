@@ -41,13 +41,13 @@ function Services() {
       // clickEvent: sliderClick
     },
     {
-      image: "/img/betrothal.png",
+      image: "/img/wedding.png",
       title: "Baby Shower",
       description: "This is a fourth description",
       // clickEvent: sliderClick
     },
     {
-      image: "/img/naming.png",
+      image: "/img/house.png",
       title: "Naming Ceremony",
       description: "This is a fifth description",
       // clickEvent: sliderClick
