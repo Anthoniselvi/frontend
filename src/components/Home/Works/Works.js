@@ -1,14 +1,14 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import "./Works.css";
 import DoneIcon from "@mui/icons-material/Done";
 
 export default function Works() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navigateToSignUp = () => {
-    // navigate("/signup");
+    navigate("/signup");
   };
   return (
     <div className="works-container" id="works">

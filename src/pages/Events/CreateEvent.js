@@ -38,7 +38,7 @@ export default function CreateEvent() {
     setName("");
     setPlace("");
     setDate("");
-    navigate(`/dashboard?profile=${profileId}`);
+    navigate(`/eventslist?profile=${profileId}`);
     // refreshPage();
   };
   return (

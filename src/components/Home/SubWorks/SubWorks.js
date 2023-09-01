@@ -1,13 +1,13 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 import "./SubWorks.css";
 import DoneIcon from "@mui/icons-material/Done";
 export default function SubWorks() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navigateToSignUp = () => {
-    // navigate("/signup");
+    navigate("/signup");
   };
   return (
     <div className="subworks-container">

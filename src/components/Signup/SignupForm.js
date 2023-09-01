@@ -80,6 +80,7 @@ const SignupForm = () => {
           profileId: user.uid,
           name: signupData.name,
           email: signupData.email,
+          mobile: signupData.mobile,
         }),
       })
         .then((response) => response.json())

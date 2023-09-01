@@ -14,10 +14,7 @@ import { Delete } from "@mui/icons-material";
 import CreateEntry from "./CreateEntry";
 import EditEntry from "./EditEntry";
 import DeleteEntry from "./DeleteEntry";
-
-export const RefreshContext = createContext({
-  updateRefreshCount: () => {},
-});
+import { useRefreshContext } from "../../RefreshContext";
 const EntriesPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -33,16 +30,7 @@ const EntriesPage = () => {
   const [selectedRowId, setSelectedRowId] = useState();
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalGift, setTotalGift] = useState(0);
-
-  const [refreshCount, setRefreshCount] = useState(0);
-
-  const updateRefreshCount = () => {
-    setRefreshCount(refreshCount + 1);
-  };
-
-  function refreshPage() {
-    updateRefreshCount();
-  }
+  const { refreshCount, refreshPage } = useRefreshContext();
   const createEntry = () => {
     setCreateModalOpen(true);
   };

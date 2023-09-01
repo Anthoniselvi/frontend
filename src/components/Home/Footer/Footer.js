@@ -1,12 +1,15 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navigateToLogin = () => {
-    // navigate("/login");
+    navigate("/login");
+  };
+  const navigateToSignup = () => {
+    navigate("/signup");
   };
   return (
     <div className="footer-container" id="footer">
@@ -70,7 +73,7 @@ export default function Footer() {
             <button className="footer-button" onClick={navigateToLogin}>
               Login
             </button>
-            <button className="footer1-button" onClick={navigateToLogin}>
+            <button className="footer1-button" onClick={navigateToSignup}>
               SignUp
             </button>
           </div>

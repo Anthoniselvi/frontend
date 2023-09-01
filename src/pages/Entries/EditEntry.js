@@ -17,8 +17,8 @@ import FormLabel from "@mui/material/FormLabel";
 import { createTheme } from "@mui/material/styles";
 
 import { ThemeProvider } from "@mui/styles";
+import { useRefreshContext } from "../../RefreshContext";
 
-// import { RefreshContext } from "./Entries";
 const theme = createTheme({
   components: {
     MuiPaper: {
@@ -37,15 +37,7 @@ export default function EditEntry({ open, onClose, entryId }) {
   const [amount, setAmount] = useState("");
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("");
-  const [refreshCount, setRefreshCount] = useState(0);
-  // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-
-  // const { updateRefreshCount } = useContext(RefreshContext);
-
-  function refreshPage() {
-    // updateRefreshCount();
-  }
-
+  const { refreshCount, refreshPage } = useRefreshContext();
   const handleEditSave = (e) => {
     e.preventDefault();
     axios
@@ -80,7 +72,7 @@ export default function EditEntry({ open, onClose, entryId }) {
   };
   useEffect(() => {
     getSelectedEntry();
-  }, []);
+  }, [refreshCount]);
 
   return (
     <ThemeProvider theme={theme}>

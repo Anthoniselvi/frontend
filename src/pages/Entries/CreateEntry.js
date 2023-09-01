@@ -16,9 +16,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { RefreshContext } from "./EntriesPage";
-// import { RefreshContext } from "./Entries";
-// import { RefreshContext } from "./index";
+import { useRefreshContext } from "../../RefreshContext";
 
 export default function CreateEntry({ open, onClose, eventId }) {
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
@@ -27,11 +25,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
   const [amount, setAmount] = useState(0);
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("amount");
-  const { updateRefreshCount } = useContext(RefreshContext);
-
-  function refreshPage() {
-    updateRefreshCount();
-  }
+  const { refreshCount, refreshPage } = useRefreshContext();
 
   const handleClose = () => {
     onClose();
@@ -56,15 +50,22 @@ export default function CreateEntry({ open, onClose, eventId }) {
       .then((response) => {
         console.log(response);
         console.log("Created New Entry: " + response.data);
-      });
 
-    setPersonName("");
-    setCity("");
-    setPresentType("");
-    setAmount("");
-    setGift("");
-    onClose();
-    refreshPage();
+        // After successfully creating the entry, trigger a refresh of the EntriesTable.
+        refreshPage();
+
+        // Reset form fields
+        setPersonName("");
+        setCity("");
+        setPresentType("");
+        setAmount("");
+        setGift("");
+        onClose();
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error("Error creating new entry:", error);
+      });
   };
 
   return (

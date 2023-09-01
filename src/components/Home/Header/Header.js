@@ -1,13 +1,13 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import Navbar from "../Navbar/Navbar";
 
 export default function FirstPage() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navigateToSignUp = () => {
-    // navigate("/signup");
+    navigate("/signup");
   };
   return (
     <div className="firstpage-container" id="home">

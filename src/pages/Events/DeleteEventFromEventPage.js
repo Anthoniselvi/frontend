@@ -11,7 +11,7 @@ import axios from "axios";
 import { useRefreshContext } from "../../RefreshContext";
 import { useNavigate } from "react-router-dom";
 
-export default function DeleteEvent({
+export default function DeleteEventFromEventPage({
   eventId,
   open,
   onClose,
@@ -32,7 +32,7 @@ export default function DeleteEvent({
       });
     onClose();
     refreshPage();
-    navigate(`/dashboard?profile=${profileId}`);
+    navigate(`/eventslist?profile=${profileId}`);
   };
   return (
     <div>

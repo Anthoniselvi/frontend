@@ -9,17 +9,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
-import { RefreshContext } from "./EntriesPage";
-// import { RefreshContext } from "./Entries";
+import { useRefreshContext } from "../../RefreshContext";
 
 export default function DeleteEntry({ entryId, open, onClose }) {
   const [personName, setPersonName] = useState();
-  const { updateRefreshCount } = useContext(RefreshContext);
-
-  function refreshPage() {
-    // window.location.reload(false);
-    updateRefreshCount();
-  }
+  const { refreshCount, refreshPage } = useRefreshContext();
   const handleClose = () => {
     onClose();
   };
@@ -46,7 +40,7 @@ export default function DeleteEntry({ entryId, open, onClose }) {
   };
   useEffect(() => {
     getSelectedEntry();
-  }, []);
+  }, [refreshCount]);
   return (
     <div>
       <Dialog

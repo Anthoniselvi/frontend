@@ -16,10 +16,11 @@ import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import DeleteEntry from "./DeleteEntry";
 import EditEntry from "./EditEntry";
-import NewEntriesPage from "./NewEntriesPage";
 import EntriesPage from "./EntriesPage";
+import { useRefreshContext } from "../../RefreshContext";
 export default function EntriesTable() {
   const isNonMobile = useMediaQuery("(max-width: 1000px)");
+  const { refreshCount, refreshPage } = useRefreshContext();
   const navigate = useNavigate();
   const [searchParam] = useSearchParams();
   const eventId = searchParam.get("event");
@@ -72,7 +73,7 @@ export default function EntriesTable() {
   useEffect(() => {
     getSelectedEvent();
     fetchAllEntries();
-  }, []);
+  }, [refreshCount]);
   const columns = [
     { field: "personName", headerName: "Name", flex: 0.2, align: "left" },
     { field: "city", headerName: "City", flex: 0.2, align: "left" },

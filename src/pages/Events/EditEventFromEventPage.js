@@ -16,14 +16,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
 import DeleteEvent from "./DeleteEventFromEventPage";
 import { useRefreshContext } from "../../RefreshContext";
+import DeleteEventFromEventPage from "./DeleteEventFromEventPage";
 // import { RefreshContext } from "./index";
 
-export default function EditEvent({
+export default function EditEventFromEventPage({
   open,
   onClose,
   eventId,
-  eventslist,
-  setEventsList,
+  eventName,
 }) {
   console.log("eventId recd in NeweditEvent :" + eventId);
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
@@ -36,6 +36,17 @@ export default function EditEvent({
   const [selectedRowId, setSelectedRowId] = React.useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { refreshCount, refreshPage } = useRefreshContext();
+  // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  // const navigate = useNavigate();
+
+  // const [searchParam] = useSearchParams();
+  // const eventId = searchParam.get("event");
+  //   const [refreshCount, setRefreshCount] = useState(0);
+  //   const { updateRefreshCount } = useContext(RefreshContext);
+  // const updateRefreshCount = () => {
+  //   setRefreshCount(refreshCount + 1);
+  // };
+  //   const { updateRefreshCount = () => {} } = useContext(RefreshContext);
 
   const handleEditSave = (e) => {
     e.preventDefault();
@@ -48,28 +59,9 @@ export default function EditEvent({
       })
       .then((response) => {
         console.log("Updated Event : " + JSON.stringify(response));
-
-        // Update the local state with the new data
-        const updatedEventList = eventslist.map((event) => {
-          if (event.eventId === eventId) {
-            // Update the properties you need
-            return {
-              ...event,
-              eventType: eventType,
-              name: name,
-              place: place,
-              date: date,
-            };
-          }
-          return event;
-        });
-
-        // Update the state in the parent component
-        setEventsList(updatedEventList);
-
-        onClose();
-        refreshPage();
       });
+    onClose();
+    refreshPage();
   };
 
   const handleDeleteEvent = (eventId) => {
@@ -279,138 +271,6 @@ export default function EditEvent({
               />
             </div>
           </form>
-          {/* <form>
-            <FormControl
-              fullWidth
-              sx={{
-                // width: "300px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiFormLabel-root": {
-                  color: "#121212",
-                },
-                "& .MuiInputBase-root": {
-                  color: "#121212",
-                },
-                "& .MuiMenuItem-root": {
-                  backgroundColor: "#fff",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-                "& .MuiSelect-icon": {
-                  color: "#121212",
-                },
-              }}
-            >
-              <InputLabel id="demo-simple-select-label">Event Type</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                required
-                value={eventType}
-                label="Event Type"
-                onChange={(e) => setEventType(e.target.value)}
-              >
-                <MenuItem value="wedding">Wedding</MenuItem>
-                <MenuItem value="birthday">Birthday</MenuItem>
-                <MenuItem value="baby">Baby Shower</MenuItem>
-                <MenuItem value="house">House Warming</MenuItem>
-                <MenuItem value="others">Others</MenuItem>
-              </Select>
-            </FormControl>
-            <br />
-            <br />
-            <TextField
-              fullWidth
-              sx={{
-                // width: "300px",
-                // margin: "5px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiInputLabel-root": { color: "#121212" },
-                "& .MuiInputBase-input": {
-                  color: "#121212",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-              }}
-              type="text"
-              label="Event Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <br />
-            <br />
-            <TextField
-              fullWidth
-              sx={{
-                // width: "300px",
-                // margin: "5px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiInputLabel-root": { color: "#121212" },
-                "& .MuiInputBase-input": {
-                  color: "#121212",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-              }}
-              type="text"
-              label="Place"
-              variant="outlined"
-              value={place}
-              onChange={(e) => setPlace(e.target.value)}
-            />
-            <br />
-            <br />
-            <TextField
-              fullWidth
-              sx={{
-                // width: "300px",
-                // margin: "5px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiInputLabel-root": { color: "#121212" },
-                "& .MuiInputBase-input": {
-                  color: "#121212",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-              }}
-              type="date"
-              label="Date"
-              variant="outlined"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-            <br />
-            <br />
-          </form> */}
         </DialogContent>
         <DialogActions>
           <Button
@@ -434,7 +294,7 @@ export default function EditEvent({
         </DialogActions>
       </Dialog>
       {deleteModalOpen ? (
-        <DeleteEvent
+        <DeleteEventFromEventPage
           profileId={profileId}
           eventName={name}
           eventId={eventId}
