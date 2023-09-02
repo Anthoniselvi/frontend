@@ -49,52 +49,29 @@ const LoginForm = () => {
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErrors(SigninValidation(signinData));
-    setDataIsCorrect(true);
-    setError("");
+    const validationErrors = SigninValidation(signinData);
+    setErrors(validationErrors);
 
-    signInWithEmailAndPassword(auth, signinData.email, signinData.password)
-      .then(async (res) => {
-        console.log(res);
-        navigate(`/dashboard?profile=${res.user.uid}`);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  };
+    if (Object.keys(validationErrors).length === 0) {
+      // No validation errors, proceed with login
+      try {
+        const res = await signInWithEmailAndPassword(
+          auth,
+          signinData.email,
+          signinData.password
+        );
 
-  const handleGoogleSignIn = async () => {
-    try {
-      const userCredential = await googleSignIn();
-      const user = userCredential.user; // Get the user from the userCredential
-
-      console.log("user : " + JSON.stringify(user));
-
-      // Update user profile in Firestore with Google login data
-      await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        email: user.email,
-      });
-
-      // Make the POST request to add Google login data to profile
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/profile/add`,
-        {
-          profileId: user.uid,
-          name: user.displayName,
-          email: user.email,
-        }
-      );
-
-      console.log("response :" + JSON.stringify(response));
-      console.log(response.data);
-      console.log(response.data.profileId);
-
-      navigate(`/dashboard?profile=${user.uid}`);
-    } catch (error) {
-      console.error(error.message);
+        const user = res.user;
+        navigate(`/dashboard?profile=${user.uid}`);
+      } catch (error) {
+        setError("Invalid email or password."); // Display a generic error message for incorrect credentials
+      }
+    } else {
+      // Validation errors exist, do not proceed with submission
+      setError("Please correct the validation errors.");
     }
   };
+
   const handleGoogleSignin = async (e) => {
     e.preventDefault();
     try {
@@ -237,6 +214,7 @@ const LoginForm = () => {
         </p>
         <hr style={{ color: "#101a34", flex: 1 }} />
       </Box>
+      {error && <span style={{ color: "red", fontSize: 16 }}>{error}</span>}
       <form
         onSubmit={handleLogin}
         style={{
@@ -280,6 +258,9 @@ const LoginForm = () => {
             value={signinData.email}
             placeholder="Enter your email"
           />
+          {errors.email && (
+            <span style={{ color: "red", fontSize: 16 }}>{errors.email}</span>
+          )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <label
@@ -317,6 +298,11 @@ const LoginForm = () => {
             value={signinData.password}
             placeholder="Enter your Password"
           />
+          {errors.password && (
+            <span style={{ color: "red", fontSize: 16 }}>
+              {errors.password}
+            </span>
+          )}
           {/* <InputAdornment
             sx={{ position: "absolute", paddingTop: 6, paddingLeft: 57 }}
           >

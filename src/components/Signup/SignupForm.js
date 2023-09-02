@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import { tokens } from "../../theme";
@@ -32,6 +32,13 @@ const SignupForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    // Check if the form data is correct and there are no errors
+    if (dataIsCorrect && Object.keys(errors).length === 0) {
+      // Submit the form here
+      handleSubmitSignup();
+    }
+  }, [dataIsCorrect, errors]);
   const navigateToSignIn = () => {
     navigate("/signin");
   };
@@ -45,55 +52,71 @@ const SignupForm = () => {
   };
 
   const handleSubmitSignup = async (e) => {
-    setLoading(true);
     e.preventDefault();
-    setErrors(Validation(signupData));
-    setDataIsCorrect(true);
-    setError("");
 
-    createUserWithEmailAndPassword(
-      auth,
-      signupData.email,
-      signupData.password
-    ).then(async (res) => {
-      const user = res.user;
-      await updateProfile(user, {
-        displayName: signupData.name,
-      });
-      // create Profile here
-      await setDoc(doc(db, "users", res.user.uid), {
-        uid: res.user.uid,
-        name: signupData.name,
-        mobile: signupData.mobile,
-        email: signupData.email,
-        password: signupData.password,
-      });
-      console.log("firebase signup created");
+    // Validate the form data
+    const validationErrors = Validation(signupData);
+    setErrors(validationErrors);
 
-      // Make the POST request to your API endpoint
-      fetch(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          profileId: user.uid,
-          name: signupData.name,
-          email: signupData.email,
-          mobile: signupData.mobile,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          console.log("fetch id:" + data.profileId);
-          navigate(`/dashboard?profile=${user.uid}`);
+    // Check if there are any validation errors
+    if (Object.keys(validationErrors).length === 0) {
+      setLoading(true);
+
+      createUserWithEmailAndPassword(
+        auth,
+        signupData.email,
+        signupData.password
+      )
+        .then(async (res) => {
+          const user = res.user;
+          await updateProfile(user, {
+            displayName: signupData.name,
+          });
+
+          // Create the user profile here
+          await setDoc(doc(db, "users", res.user.uid), {
+            uid: res.user.uid,
+            name: signupData.name,
+            mobile: signupData.mobile,
+            email: signupData.email,
+            password: signupData.password,
+          });
+
+          // Make the POST request to your API endpoint
+          fetch(`${process.env.REACT_APP_BASE_URL}/profile/add`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              profileId: user.uid,
+              name: signupData.name,
+              email: signupData.email,
+              mobile: signupData.mobile,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              console.log("fetch id:" + data.profileId);
+              navigate(`/dashboard?profile=${user.uid}`);
+            })
+            .catch((error) => {
+              console.log(error);
+              setError(error.message);
+            });
         })
         .catch((error) => {
           console.log(error);
           setError(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
         });
-    });
+    } else {
+      // Validation errors exist, do not proceed with submission
+      setDataIsCorrect(false);
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -161,6 +184,14 @@ const SignupForm = () => {
       console.error(error.message);
     }
   };
+
+  useEffect(() => {
+    // Check if the form data is correct and there are no errors
+    if (dataIsCorrect && Object.keys(errors).length === 0) {
+      // Submit the form here
+      handleSubmitSignup();
+    }
+  }, [dataIsCorrect, errors]);
   return (
     <div className="signup-form-container">
       <h4 className="signup-form-title">Sign up for MoiList</h4>
@@ -246,6 +277,7 @@ const SignupForm = () => {
         </p>
         <hr style={{ color: "#101a34", flex: 1 }} />
       </Box>
+
       <form
         onSubmit={handleSubmitSignup}
         style={{
@@ -289,6 +321,9 @@ const SignupForm = () => {
             onChange={updateHandleChange}
             placeholder="Enter your Name"
           />
+          {errors.name && (
+            <span style={{ color: "red", fontSize: 16 }}>{errors.name}</span>
+          )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <label
@@ -324,6 +359,9 @@ const SignupForm = () => {
             onChange={updateHandleChange}
             placeholder="Enter your Mobile Number"
           />
+          {errors.mobile && (
+            <span style={{ color: "red", fontSize: 16 }}>{errors.mobile}</span>
+          )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <label
@@ -359,6 +397,9 @@ const SignupForm = () => {
             onChange={updateHandleChange}
             placeholder="Enter your Email"
           />
+          {errors.email && (
+            <span style={{ color: "red", fontSize: 16 }}>{errors.email}</span>
+          )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <label
@@ -394,6 +435,11 @@ const SignupForm = () => {
             onChange={updateHandleChange}
             placeholder="Enter your Password"
           />
+          {errors.password && (
+            <span style={{ color: "red", fontSize: 16 }}>
+              {errors.password}
+            </span>
+          )}
         </div>
 
         {/* <Box display="flex" justifyContent="center" mt="10px" sx={{ gridColumn: "span 10" }}> */}
