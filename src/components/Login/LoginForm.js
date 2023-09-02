@@ -14,9 +14,7 @@ import Grid from "@mui/material/Grid";
 import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
 import { auth, db } from "../../firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
-import { IconButton, InputAdornment } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const LoginForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
@@ -80,27 +78,33 @@ const LoginForm = () => {
 
       console.log("user : " + JSON.stringify(user));
 
-      // Update user profile in Firestore with Google login data
-      await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        email: user.email,
-      });
+      // Check if the user with the same email already exists in Firestore
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
 
-      // Make the POST request to add Google login data to profile
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/profile/add`,
-        {
-          profileId: user.uid,
+      if (!userDoc.exists()) {
+        // User does not exist in Firestore, so add them
+        await setDoc(userDocRef, {
           name: user.displayName,
           email: user.email,
-        }
-      );
+        });
 
-      console.log("response :" + JSON.stringify(response));
-      console.log(response.data);
-      console.log(response.data.profileId);
+        // Make the POST request to add Google login data to profile
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/profile/add`,
+          {
+            profileId: user.uid,
+            name: user.displayName,
+            email: user.email,
+          }
+        );
 
-      navigate(`/dashboard?profile=${user.uid}`);
+        navigate(`/dashboard?profile=${response.data.profileId}`);
+      } else {
+        // User already exists in Firestore, no need to add them
+        console.log("User already exists in Firestore");
+        navigate(`/dashboard?profile=${user.uid}`);
+      }
     } catch (error) {
       console.error(error.message);
     }
