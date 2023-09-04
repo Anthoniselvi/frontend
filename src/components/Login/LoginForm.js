@@ -15,6 +15,8 @@ import { FcGoogle } from "react-icons/fc";
 import "./Login.css";
 import { auth, db } from "../../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { IconButton, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginForm = () => {
   const isNonMobile = useMediaQuery("(max-width:1000px)");
@@ -130,7 +132,6 @@ const LoginForm = () => {
           console.log(response.data);
           console.log(response.data.profileId);
           navigate(`/dashboard?profile=${user.uid}`);
-          // navigate(`/newhome?profile=${user.uid}`);
         });
     } catch (error) {
       console.error("Facebook Sign-in Error:", error);
