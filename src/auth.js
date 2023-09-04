@@ -47,6 +47,12 @@ export function UserAuthContextProvider({ children }) {
       setUser(currentUser);
     });
 
+    window.addEventListener("beforeunload", () => {
+      if (user) {
+        signOut(auth);
+      }
+    });
+
     return () => {
       unsubscribe();
     };
