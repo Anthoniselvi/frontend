@@ -1,12 +1,6 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import Carousel from "react-elastic-carousel";
-// import birthday from "../../../img/birthday.png";
-// import birthday1 from "../../../img/birthday.jpeg";
-// import wedding from "../../../img/wedding.png";
-// import house from "../../../img/house.png";
-// import betrothal from "../../../img/betrothal.jpeg";
-// import naming from "../../../img/naming.jpeg";
 
 import "./Services.css";
 
@@ -18,6 +12,11 @@ const breakPoints = [
 ];
 
 function Services() {
+  const navigate = useNavigate();
+
+  const navigateToSignUp = () => {
+    navigate("/signup");
+  };
   const items = [
     {
       image: "/img/birthday.png",
@@ -84,7 +83,9 @@ function Services() {
                 <p className="services-description">{item.description}</p>
               </div>
               <div className="services-btn-box">
-                <button className="services-btn">Create Event</button>
+                <button className="services-btn" onClick={navigateToSignUp}>
+                  Create Event
+                </button>
               </div>
             </div>
           ))}
