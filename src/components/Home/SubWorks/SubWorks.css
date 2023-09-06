@@ -30,17 +30,7 @@
     flex-direction: column;
     gap: 20px;
 }
-   .subworks-img-box {
-    background: linear-gradient(129.86deg,#DA344D -41.94%,rgba(80,188,217,0) 111.06%);
-    height: 100%;
-    width: 40%;
-      display: flex;
-      align-items: center;
-      justify-content: center; 
-      border-radius: 10px; 
-      padding-top: 1%;
-      padding-bottom: 1%;
-  }
+  
 
   /* .subworks-img-box img{
     height: 80%;

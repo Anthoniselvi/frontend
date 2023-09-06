@@ -29,7 +29,7 @@ export default function Works() {
               <div className="works-content-img">
                 <DoneIcon style={{ fontSize: 20 }} />
               </div>
-              {/* <img className="works-content-img" src="/img/check.png" /> */}
+
               <h4 className="works-content">
                 Record the gift details for birthdays, weddings, housewarming,
                 ear-piercing, and more.

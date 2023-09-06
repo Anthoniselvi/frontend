@@ -33,37 +33,33 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div className="app">
-            {auth.user ? (
-              <>
-                <NewSidebar profileId={auth.user.uid} />
-                <main className="content">
-                  <Routes>
-                    {/* {auth.user ? ( */}
-                    <>
-                      <Route path="/dashboard" element={<Dashboard />} />
-                      <Route path="/eventslist" element={<EventsPage />} />
-                      <Route path="/newevent" element={<CreateEvent />} />
-                      <Route path="/eventpage" element={<SingleEventPage />} />
-                      <Route path="/profile" element={<Profile />} />
-                    </>
-                  </Routes>
-                </main>
-              </>
-            ) : (
+            {auth.user ? <NewSidebar profileId={auth.user.uid} /> : null}
+            <main className="content">
+              {/* <Topbar setIsSidebar={setIsSidebar} /> */}
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route
-                  exact
-                  path="/resetpassword"
-                  element={<ResetPassword />}
-                />
-                <Route path="/verifyemail" element={<VerifyEmail />} />
+                {auth.user ? (
+                  <>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/eventslist" element={<EventsPage />} />
+                    <Route path="/newevent" element={<CreateEvent />} />
+                    <Route path="/eventpage" element={<SingleEventPage />} />
+                    <Route path="/profile" element={<Profile />} />
+                  </>
+                ) : (
+                  <>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route
+                      exact
+                      path="/resetpassword"
+                      element={<ResetPassword />}
+                    />
+                    <Route path="/verifyemail" element={<VerifyEmail />} />
+                  </>
+                )}
               </Routes>
-            )}
-            {/* </Routes>
-            </main> */}
+            </main>
           </div>
         </ThemeProvider>
       </ColorModeContext.Provider>
