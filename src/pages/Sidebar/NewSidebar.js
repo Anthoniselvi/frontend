@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./Sidebar.css";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -125,14 +126,15 @@ function NewSidebar(props) {
       {/* <Toolbar /> */}
       {!isMobile ? (
         <Box display="flex" alignItems="center" justifyContent="center">
-          <h1 style={{ margin: "0 auto", marginTop: 0, color: "#bf1110" }}>
+          <img src="/img/logo1.png" alt="logo" />
+          {/* <h1 style={{ margin: "0 auto", marginTop: 0, color: "#bf1110" }}>
             MOI APP
-          </h1>
+          </h1> */}
         </Box>
       ) : (
         <></>
       )}
-      <Divider style={{ borderBottom: "1px solid #e8ecf1" }} />
+      {/* <Divider style={{ borderBottom: "1px solid #e8ecf1" }} /> */}
       <List>
         {menuOptions.map((item) => (
           <ListItem key={item.text} disablePadding>
@@ -167,6 +169,7 @@ function NewSidebar(props) {
           position="fixed"
           sx={{
             width: { sm: `calc(100% - ${drawerWidth}px)` },
+
             ml: { sm: `${drawerWidth}px` },
             zIndex: 7000,
             background: "#fff",
@@ -230,27 +233,8 @@ function NewSidebar(props) {
                 </IconButton>
               </Box>
             )}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <Typography
-                variant="h4"
-                noWrap
-                component="div"
-                sx={{
-                  textAlign: "center",
-                  color: "#bf1110",
-                  fontWeight: 600,
-                  fontSize: 30,
-                }}
-              >
-                MOI APP
-              </Typography>
+            <Box className="logo-box">
+              <img src="/img/logo1.png" alt="logo" />
             </Box>
           </Toolbar>
         </AppBar>

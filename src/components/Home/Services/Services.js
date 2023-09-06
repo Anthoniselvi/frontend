@@ -33,14 +33,14 @@ function Services() {
       // clickEvent: sliderClick
     },
     {
-      image: "/img/house.png",
+      image: "/img/housing.png",
       title: "House Warming",
       description:
         "Remember the love, treasure the gifts. GiftBook helps you honor the generosity of your housewarming guests",
       // clickEvent: sliderClick
     },
     {
-      image: "/img/wedding.png",
+      image: "/img/betrothal.png",
       title: "Baby Shower",
       description: "This is a fourth description",
       // clickEvent: sliderClick
@@ -52,7 +52,7 @@ function Services() {
       // clickEvent: sliderClick
     },
     {
-      image: "/img/house.png",
+      image: "/img/engage.png",
       title: "Home Function",
       description: "This is a sixth description",
       // clickEvent: sliderClick

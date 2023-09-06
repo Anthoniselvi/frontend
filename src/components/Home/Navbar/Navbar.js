@@ -82,7 +82,7 @@ const Navbar = () => {
 
       <div className="navbar">
         <div className="nav-logo-container">
-          <h1>MOI APP</h1>
+          {/* <img src="/img/logo1.png" alt="logo" /> */}
         </div>
         <div className="navbar-links-container">
           <a href="/">Home</a>
