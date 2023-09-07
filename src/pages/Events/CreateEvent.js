@@ -110,7 +110,7 @@ export default function CreateEvent() {
                 fontWeight: 600,
               }}
             >
-              Event Type:
+              Event Type
             </label>
             <select
               style={{
@@ -150,7 +150,7 @@ export default function CreateEvent() {
                 fontWeight: 600,
               }}
             >
-              Event Name:
+              Event Name
             </label>
             <input
               type="text"
@@ -186,7 +186,7 @@ export default function CreateEvent() {
                 fontWeight: 600,
               }}
             >
-              Place:
+              Place
             </label>
             <input
               type="text"
@@ -222,7 +222,7 @@ export default function CreateEvent() {
                 fontWeight: 600,
               }}
             >
-              Event Name:
+              Date
             </label>
             <input
               type="date"
