@@ -64,7 +64,7 @@ export default function DeleteEntry({ entryId, open, onClose }) {
         </DialogContent>
         <DialogActions>
           <Button
-            sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+            sx={{ backgroundColor: "#ff574d", fontSize: "13px" }}
             type="submit"
             color="secondary"
             variant="contained"
@@ -73,7 +73,7 @@ export default function DeleteEntry({ entryId, open, onClose }) {
             No
           </Button>
           <Button
-            sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+            sx={{ backgroundColor: "#56c984", fontSize: "13px" }}
             type="submit"
             color="secondary"
             variant="contained"

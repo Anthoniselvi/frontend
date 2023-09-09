@@ -39,7 +39,14 @@ export default function DeleteEvent({
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperProps={{ sx: { backgroundColor: "#fff", color: "#121212" } }}
+        PaperProps={{
+          sx: {
+            backgroundColor: "#fff",
+            color: "#121212",
+            width: "30vw",
+            height: "10vh",
+          },
+        }}
       >
         {/* <DialogTitle>Event ID : {eventId}</DialogTitle> */}
         <DialogContent>
@@ -57,7 +64,7 @@ export default function DeleteEvent({
         </DialogContent>
         <DialogActions>
           <Button
-            sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+            sx={{ backgroundColor: "#ff574d", fontSize: "13px" }}
             type="submit"
             color="secondary"
             variant="contained"
@@ -66,7 +73,7 @@ export default function DeleteEvent({
             No
           </Button>
           <Button
-            sx={{ backgroundColor: "rgb(80, 188, 217)" }}
+            sx={{ backgroundColor: "#56c984", fontSize: "13px" }}
             type="submit"
             color="secondary"
             variant="contained"
