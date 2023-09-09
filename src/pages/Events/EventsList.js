@@ -96,7 +96,7 @@ export default function EventsList() {
         <Box
           onClick={navigateToCreateEvent}
           sx={{
-            height: "250px",
+            height: isNonMobile ? "250px" : "100px",
             // width: '30%',
             width: isNonMobile ? "30%" : "100%",
             marginBottom: isNonMobile ? undefined : "5%",
