@@ -22,7 +22,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   const [personName, setPersonName] = useState();
   const [city, setCity] = useState();
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("amount");
   const { refreshCount, refreshPage } = useRefreshContext();

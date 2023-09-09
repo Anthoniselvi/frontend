@@ -18,7 +18,7 @@ const Example = ({ eventsList }) => {
       <BarChart
         data={eventsList}
         margin={{
-          top: 10,
+          top: 30,
           right: 10,
           left: -30,
           bottom: 10,
