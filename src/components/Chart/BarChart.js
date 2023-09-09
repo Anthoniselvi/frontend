@@ -18,18 +18,18 @@ const Example = ({ eventsList }) => {
       <BarChart
         data={eventsList}
         margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
+          top: 10,
+          right: 10,
+          left: -30,
+          bottom: 10,
         }}
-        barSize={20}
+        barSize={30}
       >
         <XAxis
           dataKey="eventName"
           scale="point"
           padding={{ left: 10, right: 10 }}
-          dx={-10} // Move the labels slightly to the left
+          // dx={-10} // Move the labels slightly to the left
         />
         <YAxis />
         <Tooltip
@@ -39,7 +39,7 @@ const Example = ({ eventsList }) => {
             return [
               <Box display="flex" flexDirection="column">
                 <p>{payload.eventName}</p>
-                <p>{value}</p>
+                <p>&#8377; {value}</p>
               </Box>,
             ];
           }}

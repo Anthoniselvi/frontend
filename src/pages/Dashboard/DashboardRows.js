@@ -174,13 +174,13 @@ export default function DashboardRows() {
             >
               Events Generated
             </Typography>
-            <Typography
+            {/* <Typography
               variant="h3"
               fontWeight="500"
               color="rgba(255, 159, 64)"
             >
               {`₹ ${totalAmount}`}
-            </Typography>
+            </Typography> */}
           </Box>
 
           {/* <NewBar /> */}
