@@ -17,16 +17,15 @@ export default function SubWorks() {
           <div className="subworks-content-container">
             <div className="subworks-content-box">
               <div className="subworks-img">
-                <DoneIcon style={{ fontSize: 20 }} />
+                <DoneIcon style={{ fontSize: 20, fontWeight: 900 }} />
               </div>
-              {/* <img className="subworks-img" src="/img/check.png" /> */}
               <h4 className="subworks-content-text">
                 Track your full history of received gifts.
               </h4>
             </div>
             <div className="subworks-content-box">
               <div className="subworks-img">
-                <DoneIcon style={{ fontSize: 20 }} />
+                <DoneIcon style={{ fontSize: 20, fontWeight: 900 }} />
               </div>
 
               <h4 className="subworks-content-text">
@@ -39,7 +38,7 @@ export default function SubWorks() {
           </button>
         </Box>
         <Box className="subworks-img-box">
-          <img className="subworks-image" src="/img/ph1.png" />
+          {/* <img className="subworks-image" src="/img/phone.png" /> */}
         </Box>
       </Box>
     </div>

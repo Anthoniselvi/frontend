@@ -18,26 +18,25 @@ export default function Works() {
 
       <Box className="works-inner-box">
         <Box className="works-img-box">
-          <img className="works-img" src="/img/ph1.png" />
+          {/* <img className="works-img" src="/img/phone.png" /> */}
         </Box>
         <Box className="works-text-box">
           <h2 className="works-text-title">
-            Create a registry for each ocassion
+            Create a registry for each occassion
           </h2>
           <div className="works-bottom-container">
             <div className="works-content-box">
               <div className="works-content-img">
-                <DoneIcon style={{ fontSize: 20 }} />
+                <DoneIcon style={{ fontSize: 20, fontWeight: 900 }} />
               </div>
 
               <h4 className="works-content">
-                Record the gift details for birthdays, weddings, housewarming,
-                ear-piercing, and more.
+                Record the gift details for all occassions.
               </h4>
             </div>
             <div className="works-content-box">
               <div className="works-content-img">
-                <DoneIcon style={{ fontSize: 20 }} />
+                <DoneIcon style={{ fontSize: 20, fontWeight: 900 }} />
               </div>
 
               <h4 className="works-content">

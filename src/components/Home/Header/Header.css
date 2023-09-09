@@ -1,5 +1,6 @@
 .firstpage-container{
-   
+ 
+  width: 100vw;
     background-color: #DA344D;
     height: calc(100vh - 90px);
     display: flex;
@@ -40,9 +41,9 @@
   
   @media (max-width: 1000px) {
     .firstpage-container{
-      height:100%;
+      height:50vh;
       padding: 5%;
-      padding-top: 20%;
+      padding-top: 25%;
      border: none;
     }
     .home-text-section {

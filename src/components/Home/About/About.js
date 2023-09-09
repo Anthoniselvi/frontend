@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./About.css";
-import layout1 from "../../../img/layout1.png";
+import layout1 from "../../../img/without-bg.png";
 
 export default function About() {
   //   const phImagePath = "/img/layout1.png";
