@@ -15,7 +15,7 @@ export default function Footer() {
     <div className="footer-container" id="footer">
       <div className="footer-inner">
         <div className="footer-leftcolumn">
-          <h1>MOI APP</h1>
+          <h1>GIFT REGISTRY</h1>
           <h3>Made Easy</h3>
         </div>
         <div className="footer-rightcolumn">
