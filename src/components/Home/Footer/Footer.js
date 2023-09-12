@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
         <div className="footer-rightcolumn">
           <div className="footer-secondcolumn">
-            <h2 className="footer-subhead">About Moi-App</h2>
+            <h2 className="footer-subhead">About Gift Registry</h2>
             <h3
               className="footer-bottom-text"
               onMouseEnter={(e) => {
