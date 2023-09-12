@@ -43,8 +43,11 @@ export default function DeleteEvent({
           sx: {
             backgroundColor: "#fff",
             color: "#121212",
-            width: "30vw",
+            width: "200px", // Reduce this value to make it narrower
             height: "10vh",
+          },
+          "&. MuiDialogContainer-root": {
+            backgroundColor: "red",
           },
         }}
       >

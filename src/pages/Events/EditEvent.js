@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./Delete.css";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Box } from "@mui/material";
@@ -12,10 +13,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useMediaQuery } from "@mui/material";
+import DeleteDialog from "./DeleteDialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import { DeleteOutlineOutlined } from "@mui/icons-material";
 import DeleteEvent from "./DeleteEventFromEventPage";
 import { useRefreshContext } from "../../RefreshContext";
+import { useNavigate } from "react-router-dom";
 // import { RefreshContext } from "./index";
 
 export default function EditEvent({
@@ -26,7 +29,7 @@ export default function EditEvent({
   setEventsList,
 }) {
   console.log("eventId recd in NeweditEvent :" + eventId);
-  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+  const isMobile = useMediaQuery("(max-width: 1000px)");
   const [eventType, setEventType] = useState("");
   const [name, setName] = useState("");
   const [place, setPlace] = useState("");
@@ -36,6 +39,32 @@ export default function EditEvent({
   const [selectedRowId, setSelectedRowId] = React.useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { refreshCount, refreshPage } = useRefreshContext();
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
+  const handleConfirmDialog = () => {
+    // Handle confirmation logic here
+    setDialogOpen(false);
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(`${process.env.REACT_APP_BASE_URL}/events/delete/${eventId}`)
+      .then((response) => {
+        console.log("Deleted Parts :" + JSON.stringify(response));
+      });
+    setDialogOpen(false);
+    refreshPage();
+    navigate(`/dashboard?profile=${profileId}`);
+  };
 
   const handleEditSave = (e) => {
     e.preventDefault();
@@ -114,7 +143,8 @@ export default function EditEvent({
             Edit
           </DialogTitle>
           <DeleteOutlineOutlined
-            onClick={() => handleDeleteEvent(eventId)}
+            // onClick={() => handleDeleteEvent(eventId)}
+            onClick={handleOpenDialog}
             sx={{ fontSize: 20, cursor: "pointer", color: "#DA344D" }}
           />
         </Box>
@@ -123,8 +153,8 @@ export default function EditEvent({
             onSubmit={handleEditSave}
             style={{
               margin: "5% 0%",
-              width: "300px",
-              // width: isMobile ? "100%" : "60%",
+              // width: "300px",
+              width: isMobile ? "250px" : "300px",
               display: "flex",
               flexDirection: "column",
               gap: "20px",
@@ -279,138 +309,6 @@ export default function EditEvent({
               />
             </div>
           </form>
-          {/* <form>
-            <FormControl
-              fullWidth
-              sx={{
-                // width: "300px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiFormLabel-root": {
-                  color: "#121212",
-                },
-                "& .MuiInputBase-root": {
-                  color: "#121212",
-                },
-                "& .MuiMenuItem-root": {
-                  backgroundColor: "#fff",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-                "& .MuiSelect-icon": {
-                  color: "#121212",
-                },
-              }}
-            >
-              <InputLabel id="demo-simple-select-label">Event Type</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                required
-                value={eventType}
-                label="Event Type"
-                onChange={(e) => setEventType(e.target.value)}
-              >
-                <MenuItem value="wedding">Wedding</MenuItem>
-                <MenuItem value="birthday">Birthday</MenuItem>
-                <MenuItem value="baby">Baby Shower</MenuItem>
-                <MenuItem value="house">House Warming</MenuItem>
-                <MenuItem value="others">Others</MenuItem>
-              </Select>
-            </FormControl>
-            <br />
-            <br />
-            <TextField
-              fullWidth
-              sx={{
-                // width: "300px",
-                // margin: "5px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiInputLabel-root": { color: "#121212" },
-                "& .MuiInputBase-input": {
-                  color: "#121212",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-              }}
-              type="text"
-              label="Event Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <br />
-            <br />
-            <TextField
-              fullWidth
-              sx={{
-                // width: "300px",
-                // margin: "5px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiInputLabel-root": { color: "#121212" },
-                "& .MuiInputBase-input": {
-                  color: "#121212",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-              }}
-              type="text"
-              label="Place"
-              variant="outlined"
-              value={place}
-              onChange={(e) => setPlace(e.target.value)}
-            />
-            <br />
-            <br />
-            <TextField
-              fullWidth
-              sx={{
-                // width: "300px",
-                // margin: "5px",
-                "& > div": { width: isNonMobile ? "300px" : "250px" },
-                "& .MuiInputLabel-root": { color: "#121212" },
-                "& .MuiInputBase-input": {
-                  color: "#121212",
-                },
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "green",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "blue",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "purple",
-                },
-              }}
-              type="date"
-              label="Date"
-              variant="outlined"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-            <br />
-            <br />
-          </form> */}
         </DialogContent>
         <DialogActions>
           <Button
@@ -433,17 +331,14 @@ export default function EditEvent({
           </Button>
         </DialogActions>
       </Dialog>
-      {deleteModalOpen ? (
-        <DeleteEvent
-          profileId={profileId}
-          eventName={name}
-          eventId={eventId}
-          open={deleteModalOpen}
-          onClose={() => setDeleteModalOpen(false)}
-        />
-      ) : (
-        <></>
-      )}
+
+      <DeleteDialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        onConfirm={handleDelete}
+        // title="Confirmation Dialog"
+        message={`Are you sure you want to Delete ${name} & all their Entries?`}
+      />
     </div>
   );
 }

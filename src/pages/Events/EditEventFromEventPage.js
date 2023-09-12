@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -17,6 +18,7 @@ import { DeleteOutlineOutlined } from "@mui/icons-material";
 import DeleteEvent from "./DeleteEventFromEventPage";
 import { useRefreshContext } from "../../RefreshContext";
 import DeleteEventFromEventPage from "./DeleteEventFromEventPage";
+import DeleteDialog from "./DeleteDialog";
 // import { RefreshContext } from "./index";
 
 export default function EditEventFromEventPage({
@@ -26,7 +28,7 @@ export default function EditEventFromEventPage({
   eventName,
 }) {
   console.log("eventId recd in NeweditEvent :" + eventId);
-  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+  const isMobile = useMediaQuery("(max-width: 1000px)");
   const [eventType, setEventType] = useState("");
   const [name, setName] = useState("");
   const [place, setPlace] = useState("");
@@ -36,17 +38,26 @@ export default function EditEventFromEventPage({
   const [selectedRowId, setSelectedRowId] = React.useState(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { refreshCount, refreshPage } = useRefreshContext();
-  // const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  // const navigate = useNavigate();
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // const [searchParam] = useSearchParams();
-  // const eventId = searchParam.get("event");
-  //   const [refreshCount, setRefreshCount] = useState(0);
-  //   const { updateRefreshCount } = useContext(RefreshContext);
-  // const updateRefreshCount = () => {
-  //   setRefreshCount(refreshCount + 1);
-  // };
-  //   const { updateRefreshCount = () => {} } = useContext(RefreshContext);
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+  const handleDelete = () => {
+    axios
+      .delete(`${process.env.REACT_APP_BASE_URL}/events/delete/${eventId}`)
+      .then((response) => {
+        console.log("Deleted Parts :" + JSON.stringify(response));
+      });
+    setDialogOpen(false);
+    refreshPage();
+    navigate(`/dashboard?profile=${profileId}`);
+  };
 
   const handleEditSave = (e) => {
     e.preventDefault();
@@ -106,7 +117,8 @@ export default function EditEventFromEventPage({
             Edit
           </DialogTitle>
           <DeleteOutlineOutlined
-            onClick={() => handleDeleteEvent(eventId)}
+            // onClick={() => handleDeleteEvent(eventId)}
+            onClick={handleOpenDialog}
             sx={{ fontSize: 20, cursor: "pointer", color: "#DA344D" }}
           />
         </Box>
@@ -116,7 +128,7 @@ export default function EditEventFromEventPage({
             style={{
               margin: "5% 0%",
               width: "300px",
-              // width: isMobile ? "100%" : "60%",
+              width: isMobile ? "250px" : "300px",
               display: "flex",
               flexDirection: "column",
               gap: "20px",
@@ -293,17 +305,13 @@ export default function EditEventFromEventPage({
           </Button>
         </DialogActions>
       </Dialog>
-      {deleteModalOpen ? (
-        <DeleteEventFromEventPage
-          profileId={profileId}
-          eventName={name}
-          eventId={eventId}
-          open={deleteModalOpen}
-          onClose={() => setDeleteModalOpen(false)}
-        />
-      ) : (
-        <></>
-      )}
+      <DeleteDialog
+        open={isDialogOpen}
+        onClose={handleCloseDialog}
+        onConfirm={handleDelete}
+        // title="Confirmation Dialog"
+        message={`Are you sure you want to Delete ${name} & all their Entries?`}
+      />
     </div>
   );
 }
