@@ -126,5 +126,10 @@
       margin: 0;
       height: 500px;
       width: 350px;
+      padding-top: 20px;
     }
+    .dEuDkO, .icCrcs{
+      display: none;
+    }
+    
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Carousel from "react-elastic-carousel";
 
@@ -53,22 +53,17 @@ function Testimonal() {
   return (
     <div className="carousel-container" id="testimonal">
       <h1 className="carousel-heading">Testimonials</h1>
-      {/* <hr className="seperator" /> */}
       <div className="carousel-wrapper">
         <Carousel breakPoints={breakPoints}>
           {cards.map((card) => {
             return (
               <div className="card swiper-slide">
                 <div className="card-top">
-                  <div className="card__image">
-                    {card.image}
-                    {/* <img src={card.image} alt="card image" /> */}
-                  </div>
+                  <div className="card__image">{card.image}</div>
                 </div>
                 <div className="card__content">
                   <span className="card__name">{card.name}</span>
                   <p className="card__text">{card.description}</p>
-                  {/* <button className="card__btn">View More</button> */}
                 </div>
               </div>
             );
