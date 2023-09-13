@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./About.css";
 import layout1 from "../../../img/without-bg.png";
+import layout2 from "../../../img/about-mob.png";
+import { useMediaQuery } from "@mui/material";
 
 export default function About() {
   //   const phImagePath = "/img/layout1.png";
   const [showBackground, setShowBackground] = useState(true);
-
+  const isMobile = useMediaQuery("(max-width: 1000px)");
   useEffect(() => {
     const handleResize = () => {
       setShowBackground(window.innerWidth >= 820);
@@ -36,7 +38,11 @@ export default function About() {
         </svg>
       )}
       <div className="image-container">
-        <img src={layout1} alt="display" />
+        {isMobile ? (
+          <img src={layout2} alt="display" width="100%" />
+        ) : (
+          <img src={layout1} alt="display" />
+        )}
       </div>
     </div>
   );

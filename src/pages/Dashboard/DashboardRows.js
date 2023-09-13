@@ -23,7 +23,7 @@ import Example from "../../components/Chart/BarChart";
 import NewSearch from "../../components/Chart/NewSearch";
 import SearchTable from "../../components/Chart/SearchTable";
 export default function DashboardRows() {
-  const isNonMobile = useMediaQuery("(max-width:1000px)");
+  const isMobile = useMediaQuery("(max-width:1000px)");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ export default function DashboardRows() {
         gap="30px"
         // border="1px solid red"
         sx={{
-          "& > div": { gridColumn: isNonMobile ? "span 12" : undefined },
+          "& > div": { gridColumn: isMobile ? "span 12" : undefined },
         }}
       >
         <Box
@@ -201,11 +201,11 @@ export default function DashboardRows() {
           gridColumn="span 12"
           gridRow="span 4"
           backgroundColor="#fff"
-          //    overflow="auto"
+          overflow="auto"
           borderRadius="10px"
           border="1px solid #e8ecf1"
           sx={{
-            "& > div": { gridColumn: isNonMobile ? undefined : "span 12" },
+            "& > div": { gridColumn: isMobile ? undefined : "span 12" },
           }}
         >
           <NewSearch searchResult={searchResult} eventsList={eventsList} />

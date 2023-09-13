@@ -143,7 +143,7 @@ background-color: red;
   margin: 15px;  
   margin-top: 20%;
   border-radius: 8px;
-  box-shadow: 0 0 8px 0 rgba(8,18,53,.25);
+  box-shadow: 0 0 8px 0 #DA344D;
   /* border: 1px solid blue; */
 }
 .services-image{
@@ -200,12 +200,12 @@ background-color: red;
 
 .services-wrapper {
   width: 100%;
-
-}
+border: 1px solid red;}
 
 .rec-services-item:focus {
   outline: none;
   box-shadow: inset 0 0 1px 0px violet;
+  
 }
 
 .slick-center {
