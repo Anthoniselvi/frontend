@@ -32,6 +32,9 @@ function QuickSearchToolbar() {
           fontSize: "18px",
           color: "#101a34",
         },
+        "& .MuiDataGrid-toolbarQuickFilter:focus": {
+          border: "1px solid #DA344D",
+        },
       }}
     >
       <Typography variant="h4" fontWeight="600" color="#101a34">
@@ -121,6 +124,7 @@ export default function NewSearch({ searchResult, eventsList }) {
             "& .MuiInput-input": {
               color: "black",
             },
+
             "& .MuiSvgIcon-root": {
               color: "black",
             },

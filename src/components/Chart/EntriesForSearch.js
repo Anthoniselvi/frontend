@@ -1,33 +1,37 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
-import { useState } from "react";
-
-import Searchbar from "./Searchbar";
+import { Box, Typography } from "@mui/material";
+import React, { useState } from "react";
+import SearchOver from "./SearchOver";
 
 const EntriesForSearch = ({ eventsList, searchResult }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredResults, setFilteredResults] = useState(searchResult);
+  const [searchInput, setSearchInput] = useState("");
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  // Filter the searchResult based on the search input
+  const filteredResult = searchResult.filter((entry) => {
+    const searchQuery = searchInput.toLowerCase();
+    return (
+      entry.personName.toLowerCase().includes(searchQuery) ||
+      eventsList.some((event) => {
+        return (
+          event.eventId === entry.eventId &&
+          event.eventName.toLowerCase().includes(searchQuery)
+        );
+      }) ||
+      (entry.presentType === "amount" &&
+        entry.amount.toString().includes(searchQuery)) || // Convert to string
+      entry.gift.toLowerCase().includes(searchQuery)
+    );
+  });
 
-  const handleSearchChange = (event) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-
-    // Filter the results based on the search query
-    const filtered = searchResult.filter((entry) => {
-      if (
-        entry.personName.includes(query.toLowerCase())
-        // (entry.presentType === "amount" &&
-        //   entry.amount.toString().includes(query)) || // Use optional chaining to handle potential undefined
-        // (entry.presentType !== "amount" && entry.gift?.includes(query)) // Use optional chaining to handle potential undefined
-      ) {
-        return true;
-      }
-      return false;
-    });
-    console.log("filtered: " + JSON.stringify(filtered));
-    setFilteredResults(filtered);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setIsPopoverOpen(true);
   };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+    setIsPopoverOpen(false);
+  };
   return (
     <Box
       p="2%"
@@ -37,20 +41,23 @@ const EntriesForSearch = ({ eventsList, searchResult }) => {
       flexDirection="column"
       gap="5%"
     >
-      <Searchbar
-        eventsList={eventsList}
-        searchResult={searchResult}
-        onSearchChange={handleSearchChange}
+      <SearchOver
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        onPopoverOpen={handleClick}
+        onPopoverClose={handleClose}
+        anchorEl={anchorEl}
       />
-      {searchResult.length > 0 && (
-        <>
-          {searchResult.map((entry, index) => (
+      <Box paddingTop={isPopoverOpen ? "10%" : "0%"}>
+        {filteredResult.length > 0 ? (
+          filteredResult.map((entry, index) => (
             <Box
               key={index}
               display="grid"
               gridTemplateColumns="1fr 2fr 1fr"
               gap="4%"
               padding="2%"
+              marginBottom="2%"
               borderRadius="10px"
               border="1px solid #cad3dd"
               sx={{ backgroundColor: "#fafbfd" }}
@@ -106,9 +113,18 @@ const EntriesForSearch = ({ eventsList, searchResult }) => {
                 )}
               </Box>
             </Box>
-          ))}
-        </>
-      )}
+          ))
+        ) : (
+          <Typography
+            variant="body2"
+            color="#121212"
+            fontSize="20px"
+            padding="2%"
+          >
+            No results found.
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 };

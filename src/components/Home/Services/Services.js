@@ -21,47 +21,35 @@ function Services() {
     {
       image: "/img/birthday.png",
       title: "Birthday",
-      description:
-        "Capture and cherish every gift that comes your way on your birthday with GiftBook.",
-      // clickEvent: sliderClick
+      description: "Celebrate special moments with thoughtful gifts.",
     },
     {
       image: "/img/wedding.png",
       title: "Wedding",
-      description:
-        "Preserve the love and generosity of your wedding guests with GiftBook. A timeless keepsake of your cherished gifts.",
-      // clickEvent: sliderClick
+      description: "Cherish love and commitment with meaningful presents.",
     },
     {
       image: "/img/housing.png",
       title: "House Warming",
       description:
-        "Remember the love, treasure the gifts. GiftBook helps you honor the generosity of your housewarming guests",
-      // clickEvent: sliderClick
+        "Turn a new house into a warm and welcoming home with housewarming gifts.",
     },
     {
       image: "/img/betrothal.png",
       title: "Baby Shower",
-      description: "This is a fourth description",
-      // clickEvent: sliderClick
+      description: "Welcome a bundle of joy with adorable gifts.",
     },
     {
       image: "/img/house.png",
       title: "Naming Ceremony",
-      description: "This is a fifth description",
-      // clickEvent: sliderClick
+      description:
+        "Mark the beginning of a beautiful name with heartfelt tokens.",
     },
     {
       image: "/img/engage.png",
       title: "Home Function",
-      description: "This is a sixth description",
-      // clickEvent: sliderClick
-    },
-    {
-      image: "/img/birthday.png",
-      title: "Birthday",
-      description: "This is a seventh description",
-      // clickEvent: sliderClick
+      description:
+        "Turn a new house into a warm and welcoming home with housewarming gifts.",
     },
   ];
 
