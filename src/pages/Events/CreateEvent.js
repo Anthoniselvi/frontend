@@ -5,6 +5,7 @@ import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
+import DatePickerSample from "../../components/Chart/DatePickerSample";
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [eventType, setEventType] = useState("");
@@ -224,7 +225,8 @@ export default function CreateEvent() {
             >
               Date
             </label>
-            <input
+            <DatePickerSample />
+            {/* <input
               type="date"
               id="eventName"
               name="eventName"
@@ -243,7 +245,7 @@ export default function CreateEvent() {
               }}
               value={date}
               onChange={(e) => setDate(e.target.value)}
-            />
+            /> */}
           </div>
           <button
             type="submit"

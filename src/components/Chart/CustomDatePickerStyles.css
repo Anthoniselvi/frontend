@@ -1,0 +1,13 @@
+.custom-datepicker {
+    background-color: pink; /* Change the background color */
+    color: blue; /* Change the text color */
+  }
+  .custom-container {
+    background-color: red;
+  }
+  /* Custom CSS for selected dates */
+.custom-selected-date {
+    background-color: pink !important; /* Change the background color here */
+    color: white !important; /* Change the text color here */
+  }
+  
