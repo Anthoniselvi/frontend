@@ -8,7 +8,6 @@ import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
 import SubWorks from "./SubWorks/SubWorks";
 import Faq from "./FAQ/Faq";
-import ServicesSlick from "./Services/ServicesSlick";
 
 export default function Home() {
   return (
@@ -16,8 +15,7 @@ export default function Home() {
       <Navbar />
       <Header />
       <About />
-      {/* <Services /> */}
-      <ServicesSlick />
+      <Services />
       <Works />
       <SubWorks />
       <Testimonal />

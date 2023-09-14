@@ -1,118 +1,4 @@
-/* 
 
-.icCrcs{
-width: 10px;
-height: 10px;
-background-color: red;
-}
-.services-container {
-    background-color: #fff;
-        width: 100vw;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-   
-    padding: 10% 5%;
-    padding-top: 15%;
-  }
-.services-heading{
-    color: #101a34;
-          font-weight: 600;
-          font-family: Poppins;
-          font-size: 30px;
-  }
-  .services-slider-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    height: 400px;
-    width: 100%;
-    margin: 15px;  
-    border-radius: 8px;
-    box-shadow: 0 0 8px 0 rgba(8,18,53,.25);
-  }
-  .services-image{
-    width: 100%;
-    height: 50%;
-    overflow: hidden;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-  .services-text{
-    width: 100%; height: 35% ;
-  }
-  .services-title{
-    font-family: Poppins;
-                    font-weight: 600;
-                    font-size: 15px;
-                    color: #101a34;
-                    text-align: center;
-  }
-  .services-description{
-    font-family: Poppins;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 20px;
-    color: #5e6577;
-    text-align: center;
-  }
-  .services-btn-box{
-    width: 100%;
-     height: 15% ;
-  }
-  .services-btn{
-    background-color: #fff;
-    font-family: Poppins;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 20px;
-    text-align: center;
-    color: #DA344D;
-    border: 1px solid #DA344D;
-    border-radius: 20px;
-    padding: 5px 20px;
-    width: 60%;
-    margin: 0% 20%;
-  }
-  .seperator {
-    width: 100%;
-  }
-  
-  .controls-wrapper {
-    width: 100%;
-  
-  }
-  
-  .services-wrapper {
-    width: 100%;
-
-  }
-  
-  .rec-services-item:focus {
-    outline: none;
-    box-shadow: inset 0 0 1px 0px violet;
-  }
-  @media (max-width: 1000px) {
-    .services-container{
-     padding: 10% 2%;
-     height: 100%;
-    }
-    .services-heading{
-      font-size: 30px;
-    line-height: 35px;
-    text-align: center;
-    }
-    .services-slider-container{
-      height: 300px;
-    }
-  } */
-
-  
 .services-container {
   background-color: #fff;
       width: 100vw;
@@ -200,7 +86,7 @@ background-color: red;
 
 .services-wrapper {
   width: 100%;
-border: 1px solid red;}
+}
 
 .rec-services-item:focus {
   outline: none;

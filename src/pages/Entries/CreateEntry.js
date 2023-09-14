@@ -19,7 +19,7 @@ import FormLabel from "@mui/material/FormLabel";
 import { useRefreshContext } from "../../RefreshContext";
 
 export default function CreateEntry({ open, onClose, eventId }) {
-  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+  const isMobile = useMediaQuery("(max-width: 1000px)");
   const [personName, setPersonName] = useState();
   const [city, setCity] = useState();
   const [amount, setAmount] = useState("");
@@ -77,7 +77,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
         CREATE
       </DialogTitle>
       <DialogContent>
-        <form style={{ paddingTop: 2 }}>
+        <form style={{ paddingTop: 2, width: isMobile ? "250px" : "300px" }}>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >
@@ -156,14 +156,14 @@ export default function CreateEntry({ open, onClose, eventId }) {
           <br />
           <div
             style={{
-              width: "300px",
+              width: "100%",
               margin: "5px",
             }}
           >
             <label
               htmlFor="demo-controlled-radio-buttons-group"
               style={{
-                width: "300px",
+                width: "100%",
                 margin: "5px",
                 fontFamily: "Poppins",
                 fontSize: "13px",
