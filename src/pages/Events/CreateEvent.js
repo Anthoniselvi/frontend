@@ -11,34 +11,41 @@ export default function CreateEvent() {
   const [eventType, setEventType] = useState("");
   const [name, setName] = useState("");
   const [place, setPlace] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [selectedDate, setSelectedDate] = useState("");
   const [searchParam] = useSearchParams();
   const profileId = searchParam.get("profile");
   // const { updateRefreshCount } = useContext(RefreshContext);
   const isMobile = useMediaQuery("(max-width:1000px");
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate); // Update the selected date state
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Process.env in createEvent : " + JSON.stringify(process.env));
-    console.log(".env URL in createEvent : " + process.env.REACT_APP_BASE_URL);
+
+    // Format the selectedDate as "YYYY-MM-DD"
+    const formattedDate = selectedDate.toISOString().slice(0, 10);
+
+    // Now you can use the formatted date when creating the event
+    console.log("Formatted Date:", formattedDate);
+
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/events/add`, {
-        // eventId: eventId,
         eventType: eventType,
         name: name,
         place: place,
-        date: date,
+        date: formattedDate, // Use the selected date here
         profileId: profileId,
       })
       .then((response) => {
         console.log(response);
         console.log("CreatedEvent: " + JSON.stringify(response.data));
-        // navigate(`/newhome?profile=${profileId}`);
+        navigate(`/eventslist?profile=${profileId}`);
       });
     setEventType("");
     setName("");
     setPlace("");
-    setDate("");
+    setSelectedDate("");
     navigate(`/eventslist?profile=${profileId}`);
     // refreshPage();
   };
@@ -211,7 +218,12 @@ export default function CreateEvent() {
             />
           </div>
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              width: "100%",
+            }}
           >
             <label
               // for="eventName"
@@ -225,7 +237,7 @@ export default function CreateEvent() {
             >
               Date
             </label>
-            <DatePickerSample />
+            <DatePickerSample onDateChange={handleDateChange} />
             {/* <input
               type="date"
               id="eventName"

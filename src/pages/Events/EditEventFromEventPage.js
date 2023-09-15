@@ -19,7 +19,9 @@ import DeleteEvent from "./DeleteEventFromEventPage";
 import { useRefreshContext } from "../../RefreshContext";
 import DeleteEventFromEventPage from "./DeleteEventFromEventPage";
 import DeleteDialog from "./DeleteDialog";
+import DatePickerForEdit from "../../components/Chart/DatePickerForEdit";
 // import { RefreshContext } from "./index";
+import dayjs from "dayjs";
 
 export default function EditEventFromEventPage({
   open,
@@ -40,6 +42,9 @@ export default function EditEventFromEventPage({
   const { refreshCount, refreshPage } = useRefreshContext();
   const [isDialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
+  };
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -61,12 +66,14 @@ export default function EditEventFromEventPage({
 
   const handleEditSave = (e) => {
     e.preventDefault();
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+    console.log("formatted date:", formattedDate);
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/events/edit/${eventId}`, {
         eventType: eventType,
         name: name,
         place: place,
-        date: date,
+        date: formattedDate,
       })
       .then((response) => {
         console.log("Updated Event : " + JSON.stringify(response));
@@ -261,7 +268,8 @@ export default function EditEventFromEventPage({
               >
                 Date:
               </label>
-              <input
+              <DatePickerForEdit onChange={handleDateChange} date={date} />
+              {/* <input
                 type="date"
                 id="date"
                 name="date"
@@ -280,7 +288,7 @@ export default function EditEventFromEventPage({
                 }}
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-              />
+              /> */}
             </div>
           </form>
         </DialogContent>

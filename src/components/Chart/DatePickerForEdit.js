@@ -91,15 +91,14 @@ const theme = createTheme({
         },
       },
     },
-    Mui: {
-      styleOverrides: {
-        selected: {
-          background: "green",
-          color: "red",
-        },
-      },
-    },
-
+    // "&.Mui-selected": {
+    //   root: {
+    //     "&.Mui-selected": {
+    //       background: "green",
+    //       color: "red",
+    //     },
+    //   },
+    // },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -114,25 +113,21 @@ const theme = createTheme({
   },
 });
 
-export default function DatePickerSample({ onDateChange }) {
-  // const date1 = dayjs("2022-04-17");
-  // const date2 = dayjs();
+export default function DatePickerForEdit({ date, onChange }) {
+  console.log("date recd in datepicker:" + date);
 
-  // if (date1.isBefore(date2)) {
-  //   console.log("date1 is before date2");
-  // } else {
-  //   console.log("date1 is after date2");
-  // }
-
-  const currentDate = dayjs();
+  const formattedDate = dayjs(date).format("YYYY-MM-DD");
+  console.log("format date:" + formattedDate);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <DemoContainer components={["DesktopDatePicker "]}>
-          <DemoItem label="Desktop variant">
+          <DemoItem>
             <DesktopDatePicker
-              defaultValue={currentDate}
-              onChange={onDateChange}
+              defaultValue={formattedDate}
+              //   defaultShow={formattedDate}
+              onChange={onChange}
+              //   format="YYYY-MM-DD"
             />
           </DemoItem>
         </DemoContainer>

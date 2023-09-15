@@ -19,8 +19,9 @@ import { DeleteOutlineOutlined } from "@mui/icons-material";
 import DeleteEvent from "./DeleteEventFromEventPage";
 import { useRefreshContext } from "../../RefreshContext";
 import { useNavigate } from "react-router-dom";
+import DatePickerForEdit from "../../components/Chart/DatePickerForEdit";
 // import { RefreshContext } from "./index";
-
+import dayjs from "dayjs";
 export default function EditEvent({
   open,
   onClose,
@@ -50,9 +51,8 @@ export default function EditEvent({
     setDialogOpen(false);
   };
 
-  const handleConfirmDialog = () => {
-    // Handle confirmation logic here
-    setDialogOpen(false);
+  const handleDateChange = (newDate) => {
+    setDate(newDate); // Update the selected date state
   };
 
   const handleDelete = () => {
@@ -67,13 +67,16 @@ export default function EditEvent({
   };
 
   const handleEditSave = (e) => {
+    // const formattedDate = date.toISOString().slice(0, 10);
+    const formattedDate = dayjs(date).format("YYYY-MM-DD");
+    console.log("formatted date:", formattedDate);
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/events/edit/${eventId}`, {
         eventType: eventType,
         name: name,
         place: place,
-        date: date,
+        date: formattedDate,
       })
       .then((response) => {
         console.log("Updated Event : " + JSON.stringify(response));
@@ -117,7 +120,8 @@ export default function EditEvent({
         setEventType(response.data.eventType);
         setName(response.data.name);
         setPlace(response.data.place);
-        setDate(response.data.date);
+        const formattedDate = dayjs(response.data.date).format("YYYY-MM-DD");
+        setDate(formattedDate);
         setProfileId(response.data.profileId);
       });
   };
@@ -287,7 +291,8 @@ export default function EditEvent({
               >
                 Date:
               </label>
-              <input
+              <DatePickerForEdit onChange={handleDateChange} date={date} />
+              {/* <input
                 type="date"
                 id="date"
                 name="date"
@@ -306,7 +311,7 @@ export default function EditEvent({
                 }}
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-              />
+              /> */}
             </div>
           </form>
         </DialogContent>
