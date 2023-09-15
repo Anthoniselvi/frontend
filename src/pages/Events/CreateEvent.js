@@ -6,6 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../Sidebar/Sidebar";
 import DatePickerSample from "../../components/Chart/DatePickerSample";
+import dayjs from "dayjs";
 export default function CreateEvent() {
   const navigate = useNavigate();
   const [eventType, setEventType] = useState("");
@@ -16,39 +17,76 @@ export default function CreateEvent() {
   const profileId = searchParam.get("profile");
   // const { updateRefreshCount } = useContext(RefreshContext);
   const isMobile = useMediaQuery("(max-width:1000px");
+  const [eventTypeError, setEventTypeError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [placeError, setPlaceError] = useState("");
+  const [dateError, setDateError] = useState("");
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate); // Update the selected date state
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    let isValid = true;
 
-    // Format the selectedDate as "YYYY-MM-DD"
-    const formattedDate = selectedDate.toISOString().slice(0, 10);
+    // Validate EventType
+    if (!eventType) {
+      setEventTypeError("Event Type is required.");
+      isValid = false;
+    } else {
+      setEventTypeError("");
+    }
 
-    // Now you can use the formatted date when creating the event
-    console.log("Formatted Date:", formattedDate);
+    // Validate Name
+    if (!name) {
+      setNameError("Event Name is required.");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
 
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}/events/add`, {
-        eventType: eventType,
-        name: name,
-        place: place,
-        date: formattedDate, // Use the selected date here
-        profileId: profileId,
-      })
-      .then((response) => {
-        console.log(response);
-        console.log("CreatedEvent: " + JSON.stringify(response.data));
-        navigate(`/eventslist?profile=${profileId}`);
-      });
-    setEventType("");
-    setName("");
-    setPlace("");
-    setSelectedDate("");
-    navigate(`/eventslist?profile=${profileId}`);
-    // refreshPage();
+    // Validate Place
+    if (!place) {
+      setPlaceError("Event Place is required.");
+      isValid = false;
+    } else {
+      setPlaceError("");
+    }
+
+    // Validate Date
+    if (!selectedDate) {
+      setDateError("Event Date is required.");
+      isValid = false;
+    } else {
+      setDateError("");
+    }
+
+    // If all fields are valid, proceed with form submission
+    if (isValid) {
+      // Format the selectedDate as "YYYY-MM-DD"
+      const formattedDate = dayjs(selectedDate).format("YYYY-MM-DD");
+      axios
+        .post(`${process.env.REACT_APP_BASE_URL}/events/add`, {
+          eventType: eventType,
+          name: name,
+          place: place,
+          date: formattedDate,
+          profileId: profileId,
+        })
+        .then((response) => {
+          console.log(response);
+          console.log("CreatedEvent: " + JSON.stringify(response.data));
+          navigate(`/eventslist?profile=${profileId}`);
+        });
+
+      // Clear the form fields
+      setEventType("");
+      setName("");
+      setPlace("");
+      setSelectedDate("");
+      navigate(`/eventslist?profile=${profileId}`);
+    }
   };
+
   return (
     // <div className="home">
     //   <Sidebar profileId={profileId} />
@@ -144,6 +182,9 @@ export default function CreateEvent() {
               <option value="house">House Warming</option>
               <option value="others">Others</option>
             </select>
+            {eventTypeError && (
+              <p style={{ color: "red", fontSize: "12px" }}>{eventTypeError}</p>
+            )}
           </div>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -180,6 +221,9 @@ export default function CreateEvent() {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            {nameError && (
+              <p style={{ color: "red", fontSize: "12px" }}>{nameError}</p>
+            )}
           </div>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -216,6 +260,9 @@ export default function CreateEvent() {
               value={place}
               onChange={(e) => setPlace(e.target.value)}
             />
+            {placeError && (
+              <p style={{ color: "red", fontSize: "12px" }}>{placeError}</p>
+            )}
           </div>
           <div
             style={{
@@ -258,6 +305,9 @@ export default function CreateEvent() {
               value={date}
               onChange={(e) => setDate(e.target.value)}
             /> */}
+            {dateError && (
+              <p style={{ color: "red", fontSize: "12px" }}>{dateError}</p>
+            )}
           </div>
           <button
             type="submit"

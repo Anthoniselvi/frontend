@@ -26,46 +26,91 @@ export default function CreateEntry({ open, onClose, eventId }) {
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("amount");
   const { refreshCount, refreshPage } = useRefreshContext();
+  const [personNameError, setPersonNameError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [amountError, setAmountError] = useState("");
+  const [giftError, setGiftError] = useState("");
 
   const handleClose = () => {
     onClose();
+    resetForm();
+  };
+
+  const resetForm = () => {
     setPersonName("");
     setCity("");
-    setPresentType("");
+    setPresentType("amount");
     setAmount("");
     setGift("");
+    setPersonNameError("");
+    setCityError("");
+    setAmountError("");
+    setGiftError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}/entries/add`, {
-        personName: personName,
-        city: city,
-        presentType: presentType,
-        amount: amount,
-        gift: gift,
-        eventId: eventId,
-      })
-      .then((response) => {
-        console.log(response);
-        console.log("Created New Entry: " + response.data);
+    let isValid = true;
 
-        // After successfully creating the entry, trigger a refresh of the EntriesTable.
-        refreshPage();
+    // Validate Person Name
+    if (!personName) {
+      setPersonNameError("Person Name is required.");
+      isValid = false;
+    } else {
+      setPersonNameError("");
+    }
 
-        // Reset form fields
-        setPersonName("");
-        setCity("");
-        setPresentType("");
-        setAmount("");
-        setGift("");
-        onClose();
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.error("Error creating new entry:", error);
-      });
+    // Validate City
+    if (!city) {
+      setCityError("City is required.");
+      isValid = false;
+    } else {
+      setCityError("");
+    }
+
+    // Validate Amount if presentType is 'amount'
+    if (presentType === "amount" && !amount) {
+      setAmountError("Amount is required.");
+      isValid = false;
+    } else {
+      setAmountError("");
+    }
+
+    // Validate Gift if presentType is 'gift'
+    if (presentType === "gift" && !gift) {
+      setGiftError("Gift description is required.");
+      isValid = false;
+    } else {
+      setGiftError("");
+    }
+
+    // If all fields are valid, proceed with form submission
+    if (isValid) {
+      axios
+        .post(`${process.env.REACT_APP_BASE_URL}/entries/add`, {
+          personName: personName,
+          city: city,
+          presentType: presentType,
+          amount: amount,
+          gift: gift,
+          eventId: eventId,
+        })
+        .then((response) => {
+          console.log(response);
+          console.log("Created New Entry: " + response.data);
+
+          // After successfully creating the entry, trigger a refresh of the EntriesTable.
+          refreshPage();
+
+          // Reset form fields
+          resetForm();
+          onClose();
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("Error creating new entry:", error);
+        });
+    }
   };
 
   return (
@@ -76,7 +121,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
       <DialogTitle textAlign="center" variant="h4" color="#DA344D">
         CREATE
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ pb: 0 }}>
         <form style={{ paddingTop: 2, width: isMobile ? "250px" : "300px" }}>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -113,6 +158,11 @@ export default function CreateEntry({ open, onClose, eventId }) {
               value={personName}
               onChange={(e) => setPersonName(e.target.value)}
             />
+            {personNameError && (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {personNameError}
+              </p>
+            )}
           </div>
           <br />
           <br />
@@ -151,6 +201,9 @@ export default function CreateEntry({ open, onClose, eventId }) {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
+            {cityError && (
+              <p style={{ color: "red", fontSize: "12px" }}>{cityError}</p>
+            )}
           </div>
           <br />
           <br />
@@ -290,6 +343,12 @@ export default function CreateEntry({ open, onClose, eventId }) {
                   onChange={(e) => setGift(e.target.value)}
                 />
               )}
+              {giftError && (
+                <p style={{ color: "red", fontSize: "12px" }}>{giftError}</p>
+              )}
+              {amountError && (
+                <p style={{ color: "red", fontSize: "12px" }}>{amountError}</p>
+              )}
             </div>
           </div>
 
@@ -297,7 +356,7 @@ export default function CreateEntry({ open, onClose, eventId }) {
           <br />
         </form>
       </DialogContent>
-      <DialogActions sx={{ p: "1.25rem" }}>
+      <DialogActions sx={{ p: "1.25rem", pt: 0 }}>
         <Button
           sx={{ backgroundColor: "#ff574d", fontSize: "13px" }}
           type="submit"

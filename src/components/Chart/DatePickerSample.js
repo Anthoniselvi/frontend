@@ -91,14 +91,14 @@ const theme = createTheme({
         },
       },
     },
-    Mui: {
-      styleOverrides: {
-        selected: {
-          background: "green",
-          color: "red",
-        },
-      },
-    },
+    // "&.Mui-selected": {
+    //   root: {
+    //     "&.Mui-selected": {
+    //       background: "green",
+    //       color: "red",
+    //     },
+    //   },
+    // },
 
     MuiOutlinedInput: {
       styleOverrides: {
@@ -129,7 +129,7 @@ export default function DatePickerSample({ onDateChange }) {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <DemoContainer components={["DesktopDatePicker "]}>
-          <DemoItem label="Desktop variant">
+          <DemoItem>
             <DesktopDatePicker
               defaultValue={currentDate}
               onChange={onDateChange}

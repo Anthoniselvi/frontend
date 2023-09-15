@@ -38,8 +38,49 @@ export default function EditEntry({ open, onClose, entryId }) {
   const [gift, setGift] = useState("");
   const [presentType, setPresentType] = useState("");
   const { refreshCount, refreshPage } = useRefreshContext();
+  const [personNameError, setPersonNameError] = useState("");
+  const [cityError, setCityError] = useState("");
+  const [amountError, setAmountError] = useState("");
+  const [giftError, setGiftError] = useState("");
+
   const handleEditSave = (e) => {
     e.preventDefault();
+
+    // Validate fields
+    let isValid = true;
+
+    if (!personName) {
+      setPersonNameError("Person Name is required.");
+      isValid = false;
+    } else {
+      setPersonNameError("");
+    }
+
+    if (!city) {
+      setCityError("City is required.");
+      isValid = false;
+    } else {
+      setCityError("");
+    }
+
+    if (presentType === "amount" && !amount) {
+      setAmountError("Amount is required.");
+      isValid = false;
+    } else {
+      setAmountError("");
+    }
+
+    if (presentType === "gift" && !gift) {
+      setGiftError("Gift description is required.");
+      isValid = false;
+    } else {
+      setGiftError("");
+    }
+
+    if (!isValid) {
+      return; // Stop form submission if there are validation errors
+    }
+
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/entries/edit/${entryId}`, {
         personName: personName,
@@ -50,19 +91,15 @@ export default function EditEntry({ open, onClose, entryId }) {
       })
       .then((response) => {
         console.log("Updated Entry : " + JSON.stringify(response));
+        onClose();
+        refreshPage();
       });
-    onClose();
-
-    refreshPage();
   };
 
   const getSelectedEntry = () => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/entries/single/${entryId}`)
       .then((response) => {
-        // console.log(response);
-
-        console.log("Totals : " + JSON.stringify(response.data));
         setPersonName(response.data.personName);
         setCity(response.data.city);
         setPresentType(response.data.presentType);
@@ -70,6 +107,7 @@ export default function EditEntry({ open, onClose, entryId }) {
         setGift(response.data.gift);
       });
   };
+
   useEffect(() => {
     getSelectedEntry();
   }, [refreshCount]);
@@ -128,6 +166,11 @@ export default function EditEntry({ open, onClose, entryId }) {
                   value={personName}
                   onChange={(e) => setPersonName(e.target.value)}
                 />
+                {personNameError && (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {personNameError}
+                  </p>
+                )}
               </div>
               <br />
               <br />
@@ -170,6 +213,9 @@ export default function EditEntry({ open, onClose, entryId }) {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 />
+                {cityError && (
+                  <p style={{ color: "red", fontSize: "12px" }}>{cityError}</p>
+                )}
               </div>
               <br />
               <br />
@@ -318,6 +364,16 @@ export default function EditEntry({ open, onClose, entryId }) {
                       value={gift}
                       onChange={(e) => setGift(e.target.value)}
                     />
+                  )}
+                  {amountError && (
+                    <p style={{ color: "red", fontSize: "12px" }}>
+                      {amountError}
+                    </p>
+                  )}
+                  {giftError && (
+                    <p style={{ color: "red", fontSize: "12px" }}>
+                      {giftError}
+                    </p>
                   )}
                 </div>
               </div>

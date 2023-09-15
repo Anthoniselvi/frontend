@@ -42,6 +42,10 @@ export default function EditEventFromEventPage({
   const { refreshCount, refreshPage } = useRefreshContext();
   const [isDialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
+  const [eventTypeError, setEventTypeError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [placeError, setPlaceError] = useState("");
+  const [dateError, setDateError] = useState("");
   const handleDateChange = (newDate) => {
     setDate(newDate);
   };
@@ -68,6 +72,40 @@ export default function EditEventFromEventPage({
     e.preventDefault();
     const formattedDate = dayjs(date).format("YYYY-MM-DD");
     console.log("formatted date:", formattedDate);
+    let isValid = true;
+
+    if (!eventType) {
+      setEventTypeError("Event Type is required.");
+      isValid = false;
+    } else {
+      setEventTypeError("");
+    }
+
+    if (!name) {
+      setNameError("Event Name is required.");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (!place) {
+      setPlaceError("Place is required.");
+      isValid = false;
+    } else {
+      setPlaceError("");
+    }
+
+    if (!date) {
+      setDateError("Date is required.");
+      isValid = false;
+    } else {
+      setDateError("");
+    }
+
+    if (!isValid) {
+      return; // Stop form submission if there are validation errors
+    }
+
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/events/edit/${eventId}`, {
         eventType: eventType,
@@ -180,6 +218,11 @@ export default function EditEventFromEventPage({
                 <option value="house">House Warming</option>
                 <option value="others">Others</option>
               </select>
+              {eventTypeError && (
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  {eventTypeError}
+                </p>
+              )}
             </div>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -216,6 +259,9 @@ export default function EditEventFromEventPage({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
+              {nameError && (
+                <p style={{ color: "red", fontSize: "12px" }}>{nameError}</p>
+              )}
             </div>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -252,6 +298,9 @@ export default function EditEventFromEventPage({
                 value={place}
                 onChange={(e) => setPlace(e.target.value)}
               />
+              {placeError && (
+                <p style={{ color: "red", fontSize: "12px" }}>{placeError}</p>
+              )}
             </div>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
@@ -269,6 +318,9 @@ export default function EditEventFromEventPage({
                 Date:
               </label>
               <DatePickerForEdit onChange={handleDateChange} date={date} />
+              {dateError && (
+                <p style={{ color: "red", fontSize: "12px" }}>{dateError}</p>
+              )}
               {/* <input
                 type="date"
                 id="date"
